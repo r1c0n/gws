@@ -1,1 +1,0 @@
-console.log("It supports JavaScript too!");
