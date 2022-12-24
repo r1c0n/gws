@@ -1,4 +1,4 @@
-# gowebserver
+# gws - Gamma Web Server
 A simple and lightweight web server written in Go.
 
 ## Features
@@ -8,3 +8,9 @@ A simple and lightweight web server written in Go.
 - Middleware support
 - Static file serving
 - Template rendering
+
+## Build
+```bash
+go mod tidy
+go build
+```
