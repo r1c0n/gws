@@ -1,4 +1,4 @@
-module github.com/officialb/gowebserver
+module github.com/gamma-gws/gws
 
 go 1.19
 
