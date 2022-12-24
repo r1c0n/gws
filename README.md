@@ -8,3 +8,9 @@ A simple and lightweight web server written in Go.
 - Middleware support
 - Static file serving
 - Template rendering
+
+## Build
+```go
+go mod tidy
+go build
+```
