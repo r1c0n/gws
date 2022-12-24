@@ -10,7 +10,7 @@ A simple and lightweight web server written in Go.
 - Template rendering
 
 ## Build
-```go
+```bash
 go mod tidy
 go build
 ```
