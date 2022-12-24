@@ -6,6 +6,9 @@
     },
     "static_dir": "html",
     "template_dir": "templates",
-    "version": "1.0.0",
-    "author": "Official B"
+    "repo_config": {
+      "version": "1.0.0",
+      "author": "Official B",
+      "repository": "https://github.com/OfficialB/gowebserver"
+    }
   }  
