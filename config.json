@@ -8,7 +8,8 @@
     "template_dir": "templates",
     "repo_config": {
       "version": "1.0.0",
-      "author": "Gamma",
+      "author": "Official B",
+      "product": "Gamma Web Server",
       "repository": "https://github.com/gamma-gws/gws"
     }
   }  
