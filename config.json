@@ -1,0 +1,11 @@
+{
+    "port": ":8080",
+    "tls_config": {
+      "cert_file": "server.crt",
+      "key_file": "server.key"
+    },
+    "static_dir": "html",
+    "template_dir": "templates",
+    "version": "1.0.0",
+    "author": "Official B"
+  }  
