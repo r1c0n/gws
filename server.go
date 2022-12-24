@@ -18,8 +18,12 @@ type Config struct {
 	} `json:"tls_config"`
 	StaticDir   string `json:"static_dir"`
 	TemplateDir string `json:"template_dir"`
-	Version     string `json:"version"`
-	Author      string `json:"author"`
+
+	RepoConfig struct {
+		Version    string `json:"version"`
+		Author     string `json:"author"`
+		Repository string `json:"repository"`
+	} `json:"repo_config"`
 }
 
 func main() {
@@ -36,7 +40,7 @@ func main() {
 	}
 
 	fs := http.FileServer(http.Dir(config.StaticDir))
-	fmt.Print("Hello, World! The current version of gowebserver is v" + config.Version + " and it was written by " + config.Author + ".\n-----------------------------\n")
+	fmt.Print("Hello, World! The current version of gowebserver is v" + config.RepoConfig.Version + ", created by " + config.RepoConfig.Author + ".\n------------------------------------------------------\n")
 	fmt.Print("To exit the program, enter the key combination \"CTRL + C\".\n")
 	router.PathPrefix("/").Handler(http.StripPrefix("/", fs))
 
