@@ -8,6 +8,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/inancgumus/screen"
 )
 
 type Config struct {
@@ -28,6 +29,7 @@ type Config struct {
 }
 
 func main() {
+	screen.Clear()
 	router := mux.NewRouter()
 
 	configData, err := ioutil.ReadFile("config.json")
@@ -41,10 +43,11 @@ func main() {
 	}
 
 	fs := http.FileServer(http.Dir(config.StaticDir))
-	fmt.Print("Hello, World! The current version of gowebserver is v" + config.RepoConfig.Version + ", created by " + config.RepoConfig.Author)
-	fmt.Print(".\n--------------------------------------------------------------------------------------------\n")
+	fmt.Print("Hello, World! | ", config.RepoConfig.Product, " v", config.RepoConfig.Version, " | Created by ", config.RepoConfig.Author)
+	fmt.Print("\nTo contribute, check out our GitHub repo: ", config.RepoConfig.Repository, ".")
+	fmt.Print("\n----------------------------------------------------------------------------\n")
 	fmt.Print("To exit the program, enter the key combination \"CTRL + C\".\n")
-	fmt.Print("Site URL: http://localhost" + config.Port + "\n")
+	fmt.Print("Site URL: http://localhost", config.Port, "\n")
 	router.PathPrefix("/").Handler(http.StripPrefix("/", fs))
 
 	http.ListenAndServe(config.Port, router)
