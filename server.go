@@ -42,6 +42,7 @@ func main() {
 	fs := http.FileServer(http.Dir(config.StaticDir))
 	fmt.Print("Hello, World! The current version of gowebserver is v" + config.RepoConfig.Version + ", created by " + config.RepoConfig.Author + ".\n------------------------------------------------------\n")
 	fmt.Print("To exit the program, enter the key combination \"CTRL + C\".\n")
+	fmt.Print("Site URL: http://localhost" + config.Port + "\n")
 	router.PathPrefix("/").Handler(http.StripPrefix("/", fs))
 
 	http.ListenAndServe(config.Port, router)
