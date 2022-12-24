@@ -5,7 +5,6 @@
       "key_file": "server.key"
     },
     "static_dir": "html",
-    "template_dir": "templates",
     "repo_config": {
       "version": "1.1.0",
       "author": "Official B",

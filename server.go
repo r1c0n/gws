@@ -17,8 +17,7 @@ type Config struct {
 		CertFile string `json:"cert_file"`
 		KeyFile  string `json:"key_file"`
 	} `json:"tls_config"`
-	StaticDir   string `json:"static_dir"`
-	TemplateDir string `json:"template_dir"`
+	StaticDir string `json:"static_dir"`
 
 	RepoConfig struct {
 		Version    string `json:"version"`
