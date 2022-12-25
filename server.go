@@ -39,7 +39,6 @@ func main() {
 		log.Fatal(err)
 	}
 
-	router := mux.NewRouter()
 	screen.Clear()
 
 	fmt.Print("Hello, World! | ", config.RepoConfig.Product, " v", config.RepoConfig.Version, " | Created by ", config.RepoConfig.Author)
@@ -48,6 +47,7 @@ func main() {
 	fmt.Print("To exit the program, enter the key combination \"CTRL + C\".\n")
 	fmt.Print("Site URL: http://localhost", config.Port, "\n")
 
+	router := mux.NewRouter()
 	fs := http.FileServer(http.Dir(config.StaticDir))
 	router.PathPrefix("/").Handler(http.StripPrefix("/", fs))
 	http.ListenAndServe(config.Port, router)
