@@ -29,9 +29,6 @@ type Config struct {
 }
 
 func main() {
-	screen.Clear()
-	router := mux.NewRouter()
-
 	configData, err := ioutil.ReadFile("config.json")
 	if err != nil {
 		log.Fatal(err)
@@ -41,6 +38,9 @@ func main() {
 	if err := json.Unmarshal(configData, &config); err != nil {
 		log.Fatal(err)
 	}
+
+	router := mux.NewRouter()
+	screen.Clear()
 
 	fmt.Print("Hello, World! | ", config.RepoConfig.Product, " v", config.RepoConfig.Version, " | Created by ", config.RepoConfig.Author)
 	fmt.Print("\nTo contribute, check out our GitHub repo: ", config.RepoConfig.Repository, ".")
