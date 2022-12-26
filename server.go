@@ -53,12 +53,12 @@ func main() {
 	fmt.Print("To exit the program, enter the key combination \"CTRL + C\".\n")
 	fmt.Print("Site URL: http://localhost", config.Port, "\n")
 
-	router := mux.NewRouter() // Create a new router.
+	r := mux.NewRouter() // Create a new router.
 
 	// Set up a FileServer to serve static assets.
 	fs := http.FileServer(http.Dir(config.StaticDir))
-	router.PathPrefix("/").Handler(http.StripPrefix("/", fs))
+	r.PathPrefix("/").Handler(http.StripPrefix("/", fs))
 
 	// Start the server.
-	http.ListenAndServe(config.Port, router)
+	http.ListenAndServe(config.Port, r)
 }
