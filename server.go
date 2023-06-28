@@ -13,6 +13,7 @@ import (
 
 type Config struct {
 	Port      string `json:"port"`       // Port is the port number that the server will listen on.
+	Domain    string `json:"domain"`     // Domain represents the hostname or address of the server.
 	StaticDir string `json:"static_dir"` // StaticDir is the directory where static assets (e.g. HTML, CSS, JavaScript) are stored.
 
 	// TLSConfig contains configuration options for TLS (Transport Layer Security).
@@ -51,7 +52,7 @@ func main() {
 	fmt.Print("\nTo contribute, check out our GitHub repo: ", config.RepoConfig.Repository, ".")
 	fmt.Print("\n----------------------------------------------------------------------------\n")
 	fmt.Print("To exit the program, enter the key combination \"CTRL + C\".\n")
-	fmt.Print("Site URL: http://localhost", config.Port, "\n")
+	fmt.Print("Site URL: http://", config.Domain, config.Port, "\n")
 
 	r := mux.NewRouter() // Create a new router.
 
