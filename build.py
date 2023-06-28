@@ -21,7 +21,7 @@ config_data = '''{
         "key_file": "server.key"
     },
     "repo_config": {
-        "version": "1.2.0",
+        "version": "1.3.0",
         "author": "recon (contact@mail.recon.best)",
         "product": "Gamma Web Server",
         "repository": "https://github.com/gamma-gws/gws"
