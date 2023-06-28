@@ -4,6 +4,7 @@ import json
 import os
 from pathlib import Path
 import logging
+import argparse
 
 logging.basicConfig(level=logging.INFO)
 
@@ -67,7 +68,7 @@ def remove_gws_exe_tilde():
         gws_exe_tilde_path.unlink()
         logging.info("gws.exe~ file removed")
 
-def main():
+def main(run_dev):
     try:
         create_bin_folder()
         build_project()
@@ -77,8 +78,16 @@ def main():
         zip_bin_contents()
         remove_gws_exe_tilde()
         logging.info("Build completed")
+
+        if run_dev:
+            os.system("run-dev.bat")
+            logging.info("run-dev.bat executed")
     except Exception as e:
         logging.error(f"Build failed: {e}")
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Build and deploy script")
+    parser.add_argument("--run-dev", action="store_true", help="Run run-dev.bat after build")
+    args = parser.parse_args()
+
+    main(args.run_dev)
