@@ -1,1 +1,68 @@
-html{overflow:auto}body,div,html,iframe{margin:0;padding:0;height:100%;border:none}iframe{display:block;width:100%;border:none;overflow-y:auto;overflow-x:hidden}
+/*html{overflow:auto}body,div,html,iframe{margin:0;padding:0;height:100%;border:none}iframe{display:block;width:100%;border:none;overflow-y:auto;overflow-x:hidden}*/
+
+body {
+    font-family: sans-serif;
+    color: #333333;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3 {
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+h3 {
+    font-size: 1.2em;
+    margin-bottom: 0.5em;
+}
+
+p {
+    margin: 0 0 1em 0;
+    padding: 0;
+}
+
+/* Add a container for the content */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2em;
+    background-color: #ffffff;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Add some animation to the container */
+.container {
+    animation: fadein 2s;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Copyright message */
+.copyright {
+    position: absolute;
+    right: 33rem;
+    padding: 0.5em;
+    color: #606060;
+    font-size: 0.9em;
+    opacity: 0.5;
+}
