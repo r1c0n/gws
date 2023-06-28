@@ -54,9 +54,9 @@ def zip_bin_contents():
     with zipfile.ZipFile(release_zip_path, "w") as zip_file:
         for foldername, subfolders, filenames in os.walk("./bin"):
             for filename in filenames:
-                if filename != "Release.zip":
-                    file_path = Path(foldername) / filename
-                    arcname = file_path.relative_to("./bin")
+                file_path = Path(foldername) / filename
+                arcname = file_path.relative_to("./bin")
+                if arcname.name != "Release.zip" and arcname.name not in ["server.crt", "server.key"]:
                     zip_file.write(file_path, arcname)
 
     logging.info("Content zipped to Release.zip")
