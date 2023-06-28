@@ -45,4 +45,4 @@ Here is an example of what the **config.json** should look like.
 ```
 
 ## Misc. Info
-![](https://img.shields.io/github/go-mod/go-version/gamma-gws/gws) ![](https://img.shields.io/github/v/release/gamma-gws/gws?include_prereleases) ![](https://img.shields.io/github/license/gamma-gws/gws)
+![](https://img.shields.io/github/go-mod/go-version/r1con/gws) ![](https://img.shields.io/github/v/release/r1c0n/gws?include_prereleases) ![](https://img.shields.io/github/license/r1c0n/gws)
