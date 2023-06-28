@@ -17,6 +17,7 @@ type Config struct {
 	Domain    string `json:"domain"`
 	StaticDir string `json:"static_dir"`
 	TLSConfig struct {
+		Enabled  bool   `json:"enabled"`
 		CertFile string `json:"cert_file"`
 		KeyFile  string `json:"key_file"`
 	} `json:"tls_config"`
@@ -32,7 +33,7 @@ func main() {
 	config := loadConfig("config.json")
 
 	printHeader(config)
-	openURL(fmt.Sprintf("http://%s%s", config.Domain, config.Port))
+	openURL(config)
 	startServer(config)
 }
 
@@ -50,7 +51,15 @@ func loadConfig(filename string) Config {
 	return config
 }
 
-func openURL(url string) {
+func openURL(config Config) {
+	var url string
+
+	if config.TLSConfig.Enabled {
+		url = fmt.Sprintf("https://%s%s", config.Domain, config.Port)
+	} else {
+		url = fmt.Sprintf("http://%s%s", config.Domain, config.Port)
+	}
+
 	var cmd *exec.Cmd
 
 	switch runtime.GOOS {

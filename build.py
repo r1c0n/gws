@@ -28,6 +28,7 @@ def create_config_file(repo_config):
         "domain": "localhost",
         "static_dir": "html",
         "tls_config": {
+            "enabled": False,
             "cert_file": "server.crt",
             "key_file": "server.key"
         },
