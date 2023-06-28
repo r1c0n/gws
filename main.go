@@ -26,14 +26,14 @@ type Config struct {
 }
 
 func main() {
-	config := loadConfig()
+	config := loadConfig("config.json")
 
 	printHeader(config)
 	startServer(config)
 }
 
-func loadConfig() Config {
-	configData, err := ioutil.ReadFile("config.json")
+func loadConfig(filename string) Config {
+	configData, err := ioutil.ReadFile(filename)
 	if err != nil {
 		log.Fatal(err)
 	}
