@@ -6,9 +6,11 @@ This is the security policy for the GWS.
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 1.1.x   | :white_check_mark: |
+| 1.3.x   | :white_check_mark: |
+| 1.2.x   | :white_check_mark: |
+| 1.1.x   | :x: |
 | 1.0.x   | :x:                |
 
 ## Reporting a Vulnerability
 
-To report a vulnerability in the GWS code, please [create an issue](https://github.com/gamma-gws/gws/issues).
+To report a vulnerability in the GWS code, please [create an issue](https://github.com/r1c0n/gws/issues).
