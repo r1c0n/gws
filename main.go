@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"os/exec"
+	"runtime"
 
 	"github.com/fatih/color"
 	"github.com/inancgumus/screen"
@@ -30,6 +32,7 @@ func main() {
 	config := loadConfig("config.json")
 
 	printHeader(config)
+	openURL(fmt.Sprintf("http://%s%s", config.Domain, config.Port))
 	startServer(config)
 }
 
@@ -45,6 +48,25 @@ func loadConfig(filename string) Config {
 	}
 
 	return config
+}
+
+func openURL(url string) {
+	var cmd *exec.Cmd
+
+	switch runtime.GOOS {
+	case "darwin":
+		cmd = exec.Command("open", url)
+	case "windows":
+		cmd = exec.Command("cmd", "/c", "start", url)
+	case "linux":
+		cmd = exec.Command("xdg-open", url)
+	default:
+		log.Fatalf("Unsupported platform")
+	}
+
+	if err := cmd.Start(); err != nil {
+		log.Fatalf("Failed to open URL: %v", err)
+	}
 }
 
 func printHeader(config Config) {
