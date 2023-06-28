@@ -34,7 +34,10 @@ with open("./bin/config.json", "w") as config_file:
 print("Config created")
 
 # copy html folder to bin folder
-shutil.copytree("html", "./bin/html")
+html_dest = "./bin/html"
+if os.path.exists(html_dest):
+    shutil.rmtree(html_dest)
+shutil.copytree("html", html_dest)
 print("Template code copied to bin")
 
 # delete existing Release.zip file
@@ -42,7 +45,17 @@ if os.path.exists("./bin/Release.zip"):
     os.remove("./bin/Release.zip")
 
 # zip contents of bin folder to Release.zip
-zipfile.ZipFile("./bin/Release.zip", "w").write("./bin", arcname=os.path.basename("./bin"))
+zip_file = zipfile.ZipFile("./bin/Release.zip", "w")
+
+for foldername, subfolders, filenames in os.walk("./bin"):
+    for filename in filenames:
+        if filename != "Release.zip":
+            file_path = os.path.join(foldername, filename)
+            arcname = os.path.relpath(file_path, "./bin")
+            zip_file.write(file_path, arcname)
+
+zip_file.close()
+
 print("Content zipped to Release.zip")
 
 print("Build completed")
