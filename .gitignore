@@ -31,3 +31,7 @@ go.work
 
 # Bin folder
 bin
+
+# SSL
+server.crt
+server.key
