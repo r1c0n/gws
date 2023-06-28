@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 
+	"github.com/fatih/color"
 	"github.com/inancgumus/screen"
 )
 
@@ -48,9 +49,14 @@ func loadConfig(filename string) Config {
 
 func printHeader(config Config) {
 	screen.Clear()
-	fmt.Printf("Hello, World! | %s v%s | Created by %s\n", config.RepoConfig.Product, config.RepoConfig.Version, config.RepoConfig.Author)
-	fmt.Printf("To contribute, check out our GitHub repo: %s\n", config.RepoConfig.Repository)
+	fmt.Printf("%sHello, World! | %s v%s | Created by %s%s\n",
+		color.YellowString(""), color.GreenString(config.RepoConfig.Product),
+		color.CyanString(config.RepoConfig.Version), color.MagentaString(config.RepoConfig.Author),
+		color.YellowString(""))
+	fmt.Printf("To contribute, check out our GitHub repo: %s\n",
+		color.BlueString(config.RepoConfig.Repository))
 	fmt.Println("----------------------------------------------------------------------------")
-	fmt.Printf("To exit the program, enter the key combination \"CTRL + C\".\n")
-	fmt.Printf("Site URL: http://%s%s\n", config.Domain, config.Port)
+	fmt.Printf("To exit the program, enter the key combination %s\"CTRL + C\"%s.\n",
+		color.RedString(""), color.YellowString(""))
+	fmt.Printf("Site URL: %shttp://%s%s\n", color.WhiteString(""), config.Domain, config.Port)
 }
