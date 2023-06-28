@@ -1,6 +1,7 @@
 import os
 import shutil
 import zipfile
+import json
 
 # create bin folder if it doesn't exist
 if not os.path.exists("./bin"):
@@ -11,8 +12,13 @@ if not os.path.exists("./bin"):
 os.system("go build -o ./bin/gws.exe")
 print("Project files built")
 
+# read repo_config from gws-data.json
+with open("gws-data.json", "r") as data_file:
+    data = json.load(data_file)
+    repo_config = data.get("repo_config")
+
 # create config.json
-config_data = '''{
+config_data = {
     "port": ":8080",
     "domain": "localhost",
     "static_dir": "html",
@@ -20,16 +26,11 @@ config_data = '''{
         "cert_file": "server.crt",
         "key_file": "server.key"
     },
-    "repo_config": {
-        "version": "1.3.0",
-        "author": "recon (contact@mail.recon.best)",
-        "product": "Gamma Web Server",
-        "repository": "https://github.com/gamma-gws/gws"
-    }
-}'''
+    "repo_config": repo_config
+}
 
 with open("./bin/config.json", "w") as config_file:
-    config_file.write(config_data)
+    json.dump(config_data, config_file, indent=4)
 
 print("Config created")
 
