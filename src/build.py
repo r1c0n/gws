@@ -5,8 +5,15 @@ import os
 from pathlib import Path
 import logging
 import argparse
+import psutil
 
 logging.basicConfig(level=logging.INFO)
+
+def check_and_close_process(process_name):
+    for proc in psutil.process_iter():
+        if proc.name() == process_name:
+            logging.info(f"Closing {process_name} process (PID: {proc.pid})")
+            proc.kill()
 
 def create_bin_folder():
     bin_path = Path("./bin")
@@ -70,6 +77,7 @@ def remove_gws_exe_tilde():
 
 def main(run_dev):
     try:
+        check_and_close_process("gws.exe")
         create_bin_folder()
         build_project()
         repo_config = read_repo_config()
