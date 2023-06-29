@@ -8,6 +8,7 @@ import psutil
 from pathlib import Path
 
 # Constants
+GWS_DATA_FILE_PATH = "json/gws-data.json"
 BIN_PATH = Path("./bin")
 CONFIG_FILE_PATH = BIN_PATH / "config.json"
 HTML_DIR_PATH = BIN_PATH / "html"
@@ -36,7 +37,7 @@ def build_project():
 
 def read_repo_config():
     """Read the repository configuration from 'gws-data.json'."""
-    with open("gws-data.json", "r") as data_file:
+    with open(GWS_DATA_FILE_PATH, "r") as data_file:
         data = json.load(data_file)
         return data.get("repo_config")
 
