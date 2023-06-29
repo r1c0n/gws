@@ -27,6 +27,7 @@ To see your website, visit the link showed on the command-line below the product
 Gamma Web Server uses a JSON configuration file to customize its behavior. You can specify the port, the document root & more in the configuration file. Find the configuration file in the project's root directory. It will be called **config.json**.
 
 Here is an example of what the **config.json** should look like.
+
 ```json
 {
     "port": ":80",
@@ -45,4 +46,5 @@ Here is an example of what the **config.json** should look like.
 ```
 
 ## Misc. Info
+
 ![](https://img.shields.io/github/go-mod/go-version/r1con/gws) ![](https://img.shields.io/github/v/release/r1c0n/gws?include_prereleases) ![](https://img.shields.io/github/license/r1c0n/gws)
