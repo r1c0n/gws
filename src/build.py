@@ -2,35 +2,46 @@ import shutil
 import zipfile
 import json
 import os
-from pathlib import Path
 import logging
 import argparse
 import psutil
+from pathlib import Path
+
+# Constants
+BIN_PATH = Path("./bin")
+CONFIG_FILE_PATH = BIN_PATH / "config.json"
+HTML_DIR_PATH = BIN_PATH / "html"
+RELEASE_ZIP_PATH = BIN_PATH / "Release.zip"
+GWS_EXE_TILDE_PATH = BIN_PATH / "gws.exe~"
 
 logging.basicConfig(level=logging.INFO)
 
 def check_and_close_process(process_name):
+    """Check for a process with the given name and close it if found."""
     for proc in psutil.process_iter():
         if proc.name() == process_name:
             logging.info(f"Closing {process_name} process (PID: {proc.pid})")
             proc.kill()
 
 def create_bin_folder():
-    bin_path = Path("./bin")
-    if not bin_path.exists():
-        bin_path.mkdir()
+    """Create the 'bin' folder if it doesn't exist."""
+    if not BIN_PATH.exists():
+        BIN_PATH.mkdir()
         logging.info("Bin folder created")
 
 def build_project():
+    """Build the project files."""
     os.system("go build -o ./bin/gws.exe")
     logging.info("Project files built")
 
 def read_repo_config():
+    """Read the repository configuration from 'gws-data.json'."""
     with open("gws-data.json", "r") as data_file:
         data = json.load(data_file)
         return data.get("repo_config")
 
 def create_config_file(repo_config):
+    """Create the 'config.json' file with the given repository configuration."""
     config_data = {
         "port": ":8080",
         "domain": "localhost",
@@ -43,36 +54,36 @@ def create_config_file(repo_config):
         "repo_config": repo_config
     }
 
-    with open("./bin/config.json", "w") as config_file:
+    with open(CONFIG_FILE_PATH, "w") as config_file:
         json.dump(config_data, config_file, indent=4)
     logging.info("Config created")
 
 def copy_html_files():
-    html_dest = Path("./bin/html")
-    if html_dest.exists():
-        shutil.rmtree(html_dest)
-    shutil.copytree("html", html_dest)
+    """Copy the HTML template code to the 'bin/html' directory."""
+    if HTML_DIR_PATH.exists():
+        shutil.rmtree(HTML_DIR_PATH)
+    shutil.copytree("html", HTML_DIR_PATH)
     logging.info("Template code copied to bin")
 
 def zip_bin_contents():
-    release_zip_path = Path("./bin/Release.zip")
-    if release_zip_path.exists():
-        release_zip_path.unlink()
+    """Zip the contents of the 'bin' directory (excluding unnecessary files)."""
+    if RELEASE_ZIP_PATH.exists():
+        RELEASE_ZIP_PATH.unlink()
 
-    with zipfile.ZipFile(release_zip_path, "w") as zip_file:
-        for foldername, subfolders, filenames in os.walk("./bin"):
+    with zipfile.ZipFile(RELEASE_ZIP_PATH, "w") as zip_file:
+        for foldername, subfolders, filenames in os.walk(BIN_PATH):
             for filename in filenames:
                 file_path = Path(foldername) / filename
-                arcname = file_path.relative_to("./bin")
+                arcname = file_path.relative_to(BIN_PATH)
                 if arcname.name != "Release.zip" and arcname.name not in ["server.crt", "server.key"]:
                     zip_file.write(file_path, arcname)
 
     logging.info("Content zipped to Release.zip")
 
 def remove_gws_exe_tilde():
-    gws_exe_tilde_path = Path("./bin/gws.exe~")
-    if gws_exe_tilde_path.exists():
-        gws_exe_tilde_path.unlink()
+    """Remove the 'gws.exe~' file if it exists."""
+    if GWS_EXE_TILDE_PATH.exists():
+        GWS_EXE_TILDE_PATH.unlink()
         logging.info("gws.exe~ file removed")
 
 def main(run_dev):
@@ -90,6 +101,10 @@ def main(run_dev):
         if run_dev:
             os.system("run-dev.bat")
             logging.info("run-dev.bat executed")
+    except FileNotFoundError as e:
+        logging.error(f"File not found: {e}")
+    except json.JSONDecodeError as e:
+        logging.error(f"JSON decoding failed: {e}")
     except Exception as e:
         logging.error(f"Build failed: {e}")
 
