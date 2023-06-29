@@ -2,6 +2,20 @@
 
 A lightweight and fast web server written in Go.
 
+## Contents
+
+These are what the different files / directories contain in this repository.
+
+| File/folder       | Description                                | Directory |
+|-------------------|--------------------------------------------|-----------|
+| `branding`        | Contains Gamma artwork.                    | Yes       |
+| `src`             | Source code of Gamma Web Server.           | Yes       |
+| `.gitattributes`  | Defines attribute rules for Git repository.| No        |
+| `.gitignore`      | Defines what to not commit to Git.         | No        |
+| `LICENSE`         | The Gamma Web Server license.              | No        |
+| `README.md`       | Before asking questions, read this file.   | No        |
+| `SECURITY.md`     | Contains the security policy of Gamma.     | No        |
+
 ## Features
 
 - Supports HTTP and HTTPS
