@@ -1,8 +1,8 @@
 {
     "repo_config": {
-        "version": "1.3.x (LTS)",
+        "version": "1.3 (LTS)",
         "author": "recon (recon@mail.recon.best)",
         "product": "Gamma Web Server",
-        "repository": "https://github.com/gamma-gws/gws"
+        "repository": "https://github.com/r1c0n/gws"
     }
 }

@@ -3,3 +3,8 @@ zipfile
 json
 pathlib
 logging
+psutil
+argparse
+
+# To install these packages that are required to run build.py, run the below command.
+# pip install -r requirements.txt

@@ -8,6 +8,7 @@ import psutil
 from pathlib import Path
 
 # Constants
+GWS_DATA_FILE_PATH = "json/gws-data.json"
 BIN_PATH = Path("./bin")
 CONFIG_FILE_PATH = BIN_PATH / "config.json"
 HTML_DIR_PATH = BIN_PATH / "html"
@@ -31,12 +32,12 @@ def create_bin_folder():
 
 def build_project():
     """Build the project files."""
-    os.system("go build -o ./bin/gws.exe")
+    os.system("go build -buildmode=exe -o ./bin/gws.exe")
     logging.info("Project files built")
 
 def read_repo_config():
     """Read the repository configuration from 'gws-data.json'."""
-    with open("gws-data.json", "r") as data_file:
+    with open(GWS_DATA_FILE_PATH, "r") as data_file:
         data = json.load(data_file)
         return data.get("repo_config")
 
@@ -75,7 +76,7 @@ def zip_bin_contents():
             for filename in filenames:
                 file_path = Path(foldername) / filename
                 arcname = file_path.relative_to(BIN_PATH)
-                if arcname.name != "Release.zip" and arcname.name not in ["server.crt", "server.key"]:
+                if arcname.name != "Release.zip" and arcname.name not in ["server.crt", "server.key", ".gws.exe.old"]:
                     zip_file.write(file_path, arcname)
 
     logging.info("Content zipped to Release.zip")

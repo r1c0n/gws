@@ -1,6 +1,46 @@
-# Gamma Web Server - GWS
+<p align="center">
+    <a href="https://www.gammaws.gq" target="_blank">
+        <img src="./branding/gws-wordmark-01.png" alt="logo" width="125"/>
+    </a>
+</p>
 
-A lightweight and fast web server written in Go.
+<h4 align="center">A lightweight and fast web server written in Go.</h4>
+
+<p align="center">
+
+[![All Contributors](https://img.shields.io/github/all-contributors/r1c0n/gws?color=ee8449&style=flat-square)](#contributors)
+
+<a href="https://github.com/r1c0n/gws/blob/master/LICENSE" target="blank">
+<img src="https://img.shields.io/github/license/r1c0n/gws?style=flat-square" alt="gws license" />
+</a>
+<a href="https://github.com/r1c0n/gws/fork" target="blank">
+<img src="https://img.shields.io/github/forks/r1c0n/gws?style=flat-square" alt="gws forks"/>
+</a>
+<a href="https://github.com/r1c0n/gws/stargazers" target="blank">
+<img src="https://img.shields.io/github/stars/r1c0n/gws?style=flat-square" alt="gws stars"/>
+</a>
+<a href="https://github.com/r1c0n/gws/issues" target="blank">
+<img src="https://img.shields.io/github/issues/r1c0n/gws?style=flat-square" alt="gws issues"/>
+</a>
+<a href="https://github.com/r1c0n/gws/pulls" target="blank">
+<img src="https://img.shields.io/github/issues-pr/r1c0n/gws?style=flat-square" alt="gws pull-requests"/>
+</a>
+<a href="https://twitter.com/intent/tweet?text=👋%20Check%20out%20this%20amazing%20webserver!%20https://github.com/r1c0n/gws"><img src="https://img.shields.io/twitter/url?label=Share%20on%20Twitter&style=social&url=https%3A%2F%2Fgithub.com%2Fr1c0n%2Fgws"></a>
+</p>
+
+## Contents
+
+These are what the different files / directories contain in this repository.
+
+| File/folder       | Description                                | Directory |
+|-------------------|--------------------------------------------|-----------|
+| `branding`        | Contains Gamma artwork.                    | Yes       |
+| `src`             | Source code of Gamma Web Server.           | Yes       |
+| `.gitattributes`  | Defines attribute rules for Git repository.| No        |
+| `.gitignore`      | Defines what to not commit to Git.         | No        |
+| `LICENSE`         | The Gamma Web Server license.              | No        |
+| `README.md`       | Before asking questions, read this file.   | No        |
+| `SECURITY.md`     | Contains the security policy of Gamma.     | No        |
 
 ## Features
 
@@ -27,6 +67,7 @@ To see your website, visit the link showed on the command-line below the product
 Gamma Web Server uses a JSON configuration file to customize its behavior. You can specify the port, the document root & more in the configuration file. Find the configuration file in the project's root directory. It will be called **config.json**.
 
 Here is an example of what the **config.json** should look like.
+
 ```json
 {
     "port": ":80",
@@ -44,5 +85,23 @@ Here is an example of what the **config.json** should look like.
   }  
 ```
 
-## Misc. Info
-![](https://img.shields.io/github/go-mod/go-version/r1con/gws) ![](https://img.shields.io/github/v/release/r1c0n/gws?include_prereleases) ![](https://img.shields.io/github/license/r1c0n/gws)
+## License
+
+Gamma Web Server is licensed under the GNU General Public License v3.0 - see the [`LICENSE`](LICENSE) file for details.
+
+## Contributors
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
