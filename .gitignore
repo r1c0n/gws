@@ -35,3 +35,6 @@ bin
 # SSL
 server.crt
 server.key
+
+# vscode cfg
+.vscode
