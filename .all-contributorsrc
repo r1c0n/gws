@@ -5,7 +5,6 @@
   "imageSize": 100,
   "commit": false,
   "contributorsPerLine": 7,
-  "contributorTemplate": "<a href=\"<%= contributor.profile %>\"><img src=\"<%= contributor.avatar_url %>\" width=\"<%= options.imageSize %>px;\" alt=\"\"/><br /><sub><b><%= contributor.name %></b></sub></a>",
   "projectName": "gws",
   "projectOwner": "r1c0n",
   "repoType": "github",
