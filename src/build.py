@@ -32,7 +32,7 @@ def create_bin_folder():
 
 def build_project():
     """Build the project files."""
-    os.system("go build -o ./bin/gws.exe")
+    os.system("go build -buildmode=exe -o ./bin/gws.exe")
     logging.info("Project files built")
 
 def read_repo_config():
