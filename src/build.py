@@ -76,7 +76,7 @@ def zip_bin_contents():
             for filename in filenames:
                 file_path = Path(foldername) / filename
                 arcname = file_path.relative_to(BIN_PATH)
-                if arcname.name != "Release.zip" and arcname.name not in ["server.crt", "server.key"]:
+                if arcname.name != "Release.zip" and arcname.name not in ["server.crt", "server.key", ".gws.exe.old"]:
                     zip_file.write(file_path, arcname)
 
     logging.info("Content zipped to Release.zip")
