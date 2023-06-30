@@ -1,6 +1,7 @@
-
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/github/all-contributors/r1c0n/gws?color=ee8449&style=flat-square)](#contributors)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 <p align="center">
@@ -38,15 +39,19 @@
 
 These are what the different files / directories contain in this repository.
 
-| File/folder       | Description                                | Directory |
-|-------------------|--------------------------------------------|-----------|
-| `branding`        | Contains Gamma artwork.                    | Yes       |
-| `src`             | Source code of Gamma Web Server.           | Yes       |
-| `.gitattributes`  | Defines attribute rules for Git repository.| No        |
-| `.gitignore`      | Defines what to not commit to Git.         | No        |
-| `LICENSE`         | The Gamma Web Server license.              | No        |
-| `README.md`       | Before asking questions, read this file.   | No        |
-| `SECURITY.md`     | Contains the security policy of Gamma.     | No        |
+| File/folder           | Description                                                           | Directory |
+| --------------------- | --------------------------------------------------------------------- | --------- |
+| `branding`            | Contains Gamma artwork.                                               | Yes       |
+| `src`                 | Source code of Gamma Web Server.                                      | Yes       |
+| `.all-contributorsrc` | All-Contributors bot configuration file                               | No        |
+| `.gitattributes`      | Defines attribute rules for Git repository.                           | No        |
+| `.gitignore`          | Defines what to not commit to Git.                                    | No        |
+| `.markdownlint.json`  | Markdownlint configuration file.                                      | No        |
+| `.prettierrc`         | Prettier configuration file.                                          | No        |
+| `CODE_OF_CONDUCT.md`  | This contains the contributor covenant code of conduct.               | No        |
+| `LICENSE`             | The Gamma Web Server license.                                         | No        |
+| `README.md`           | Before asking questions, read this file.                              | No        |
+| `SECURITY.md`         | Contains the security policy of Gamma, along with supported versions. | No        |
 
 ## Features
 
@@ -76,19 +81,19 @@ Here is an example of what the **config.json** should look like.
 
 ```json
 {
-    "port": ":80",
-    "tls_config": {
-      "cert_file": "server.crt",
-      "key_file": "server.key"
-    },
-    "static_dir": "public",
-    "repo_config": {
-      "version": "1.1.0",
-      "author": "Official B",
-      "product": "Gamma Web Server",
-      "repository": "https://github.com/gamma-gws/gws"
-    }
-  }  
+  "port": ":80",
+  "tls_config": {
+    "cert_file": "server.crt",
+    "key_file": "server.key"
+  },
+  "static_dir": "public",
+  "repo_config": {
+    "version": "1.1.0",
+    "author": "Official B",
+    "product": "Gamma Web Server",
+    "repository": "https://github.com/gamma-gws/gws"
+  }
+}
 ```
 
 ## License
