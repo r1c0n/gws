@@ -10,5 +10,23 @@
   "projectOwner": "r1c0n",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": true
+  "skipCi": true,
+  "commitType": "docs",
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "r1c0n",
+      "name": "recon",
+      "avatar_url": "https://avatars.githubusercontent.com/u/86677439?v=4",
+      "profile": "https://www.recon.best",
+      "contributions": [
+        "code",
+        "doc",
+        "design",
+        "example",
+        "infra",
+        "review"
+      ]
+    }
+  ]
 }
