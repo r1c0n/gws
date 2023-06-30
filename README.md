@@ -1,5 +1,6 @@
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/062e9fa1380e4f3fbb4d472cd0fa89fc)](https://app.codacy.com/gh/r1c0n/gws?utm_source=github.com&utm_medium=referral&utm_content=r1c0n/gws&utm_campaign=Badge_Grade)
 [![All Contributors](https://img.shields.io/github/all-contributors/r1c0n/gws?color=ee8449&style=flat-square)](#contributors)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
