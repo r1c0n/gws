@@ -10,6 +10,7 @@
     </a>
 </p>
 
+<h1 align="center">Introducing <code>Gamma Web Server 🚀</code></h1>
 <h4 align="center">A lightweight and fast web server written in Go.</h4>
 
 <p align="center">
@@ -35,7 +36,7 @@
 <a href="https://twitter.com/intent/tweet?text=👋%20Check%20out%20this%20amazing%20webserver!%20https://github.com/r1c0n/gws"><img src="https://img.shields.io/twitter/url?label=Share%20on%20Twitter&style=social&url=https%3A%2F%2Fgithub.com%2Fr1c0n%2Fgws"></a>
 </p>
 
-## Contents
+## 🔍 Contents
 
 These are what the different files / directories contain in this repository.
 
@@ -53,17 +54,17 @@ These are what the different files / directories contain in this repository.
 | `README.md`           | Before asking questions, read this file.                              | No        |
 | `SECURITY.md`         | Contains the security policy of Gamma, along with supported versions. | No        |
 
-## Features
+## ✨ Features
 
 - Supports HTTP and HTTPS
 - Easy & quick setup
 - Easy to use configuration file
 
-## Installation
+## 🚀 Installation
 
 Download the latest release from GitHub, or find the latest release on our website: [https://www.gammaws.gq](https://www.gammaws.gq)
 
-## Usage
+## 📖 Usage
 
 To start Gamma Web Server, double click on the .exe file, or run it through the command-line.
 
@@ -73,7 +74,7 @@ To start Gamma Web Server, double click on the .exe file, or run it through the 
 
 To see your website, visit the link showed on the command-line below the product information. By default, the link is [localhost:8080](localhost:8080).
 
-## Configuration
+## ⚙️ Configuration
 
 Gamma Web Server uses a JSON configuration file to customize its behavior. You can specify the port, the document root & more in the configuration file. Find the configuration file in the project's root directory. It will be called **config.json**.
 
@@ -96,11 +97,11 @@ Here is an example of what the **config.json** should look like.
 }
 ```
 
-## License
+## 📄 License
 
 Gamma Web Server is licensed under the GNU General Public License v3.0 - see the [`LICENSE`](LICENSE) file for details.
 
-## Contributors
+## 💪 Contributors
 
 Thank you to the wonderful people below! ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
@@ -122,3 +123,9 @@ Thank you to the wonderful people below! ([emoji key](https://allcontributors.or
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+---
+
+<h3 align="center">
+Don't forget to give a ⭐️ to <b>Gamma Web Server</b>! It's a great motivation booster.
+</h3>
