@@ -9,7 +9,6 @@
 <p align="center">
 
 [![All Contributors](https://img.shields.io/github/all-contributors/r1c0n/gws?color=ee8449&style=flat-square)](#contributors)
-
 <a href="https://github.com/r1c0n/gws/blob/master/LICENSE" target="blank">
 <img src="https://img.shields.io/github/license/r1c0n/gws?style=flat-square" alt="gws license" />
 </a>
