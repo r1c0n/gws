@@ -34,7 +34,6 @@ p {
   padding: 0;
 }
 
-/* Add a container for the content */
 .container {
   max-width: 800px;
   margin: 0 auto;
@@ -43,7 +42,6 @@ p {
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.1);
 }
 
-/* Add some animation to the container */
 .container {
   animation: fadein 2s;
 }
@@ -57,7 +55,6 @@ p {
   }
 }
 
-/* Copyright message */
 .copyright {
   position: absolute;
   right: 33rem;
