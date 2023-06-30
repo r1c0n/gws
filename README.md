@@ -28,6 +28,9 @@
 <a href="https://github.com/r1c0n/gws/pulls" target="blank">
 <img src="https://img.shields.io/github/issues-pr/r1c0n/gws?style=flat-square" alt="gws pull-requests"/>
 </a>
+<a href="https://app.codacy.com/gh/r1c0n/gws/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade">
+    <img src="https://app.codacy.com/project/badge/Grade/b4242484e7b840e6b1f5dd877723a8df"/>
+</a>
 <a href="https://twitter.com/intent/tweet?text=👋%20Check%20out%20this%20amazing%20webserver!%20https://github.com/r1c0n/gws"><img src="https://img.shields.io/twitter/url?label=Share%20on%20Twitter&style=social&url=https%3A%2F%2Fgithub.com%2Fr1c0n%2Fgws"></a>
 </p>
 
