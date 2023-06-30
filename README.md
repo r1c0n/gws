@@ -10,7 +10,7 @@
     </a>
 </p>
 
-<h1 align="center">Introducing <code>Gamma Web Server 🚀</code></h1>
+<h1 align="center">Introducing <code>Gamma Web Server</code> 🚀</h1>
 <h4 align="center">A lightweight and fast web server written in Go.</h4>
 
 <p align="center">
