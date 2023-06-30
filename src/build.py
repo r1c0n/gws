@@ -72,7 +72,7 @@ def zip_bin_contents():
         RELEASE_ZIP_PATH.unlink()
 
     with zipfile.ZipFile(RELEASE_ZIP_PATH, "w") as zip_file:
-        for foldername, subfolders, filenames in os.walk(BIN_PATH):
+        for foldername, subfolders, filenames in os.walk(BIN_PATH): # DO NOT REMOVE SUBFOLDERS! IT WILL BREAK THE BUILD SCRIPT!!
             for filename in filenames:
                 file_path = Path(foldername) / filename
                 arcname = file_path.relative_to(BIN_PATH)
