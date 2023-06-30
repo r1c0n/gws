@@ -56,17 +56,31 @@ These are what the different files / directories contain in this repository.
 
 ## ✨ Features
 
-- Supports HTTP and HTTPS
+- Supports `HTTP` and `HTTPS`
 - Easy & quick setup
 - Easy to use configuration file
 
+## 🚧 Build
+
+Building `Gamma Web Server` is easy. Simply navigate to the `src` directory and run the below command in the Windows command prompt.
+
+```ps
+py build.py --run-dev
+```
+
+Alternatively, if you do not want gws.exe to start after building is finished, run the below command.
+
+```ps
+py build.py
+```
+
 ## 🚀 Installation
 
-Download the latest release from GitHub, or find the latest release on our website: [https://www.gammaws.gq](https://www.gammaws.gq)
+Download the latest release from `GitHub`, or find the latest release on our website: [https://www.gammaws.gq](https://www.gammaws.gq)
 
 ## 📖 Usage
 
-To start Gamma Web Server, double click on the .exe file, or run it through the command-line.
+To start `Gamma Web Server`, double click on the `.exe` file, or run it through the `command-line`.
 
 ```cmd
 .\gws.exe
@@ -76,7 +90,7 @@ To see your website, visit the link showed on the command-line below the product
 
 ## ⚙️ Configuration
 
-Gamma Web Server uses a JSON configuration file to customize its behavior. You can specify the port, the document root & more in the configuration file. Find the configuration file in the project's root directory. It will be called **config.json**.
+`Gamma Web Server` uses a `JSON configuration file` to customize its behavior. You can specify the port, the document root & more in the configuration file. You can find an example config.json in the src/json directory. One will be generated when the project is built.
 
 Here is an example of what the **config.json** should look like.
 
