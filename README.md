@@ -36,7 +36,7 @@
 <a href="https://twitter.com/intent/tweet?text=👋%20Check%20out%20this%20amazing%20webserver!%20https://github.com/r1c0n/gws"><img src="https://img.shields.io/twitter/url?label=Share%20on%20Twitter&style=social&url=https%3A%2F%2Fgithub.com%2Fr1c0n%2Fgws"></a>
 </p>
 
-## 🔍 Contents
+## 🔍 File Content
 
 These are what the different files / directories contain in this repository.
 
@@ -48,6 +48,7 @@ These are what the different files / directories contain in this repository.
 | `.gitattributes`      | Defines attribute rules for Git repository.                           | No        |
 | `.gitignore`          | Defines what to not commit to Git.                                    | No        |
 | `.markdownlint.json`  | Markdownlint configuration file.                                      | No        |
+| `.prettierignore`     | Defines folders or files to not format in Prettier                    | No        |
 | `.prettierrc`         | Prettier configuration file.                                          | No        |
 | `CODE_OF_CONDUCT.md`  | This contains the contributor covenant code of conduct.               | No        |
 | `LICENSE`             | The Gamma Web Server license.                                         | No        |
