@@ -36,7 +36,7 @@
 <a href="https://twitter.com/intent/tweet?text=👋%20Check%20out%20this%20amazing%20webserver!%20https://github.com/r1c0n/gws"><img src="https://img.shields.io/twitter/url?label=Share%20on%20Twitter&style=social&url=https%3A%2F%2Fgithub.com%2Fr1c0n%2Fgws"></a>
 </p>
 
-## 🔍 Contents
+## 🔍 File Content
 
 These are what the different files / directories contain in this repository.
 
