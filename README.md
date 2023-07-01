@@ -48,6 +48,7 @@ These are what the different files / directories contain in this repository.
 | `.gitattributes`      | Defines attribute rules for Git repository.                           | No        |
 | `.gitignore`          | Defines what to not commit to Git.                                    | No        |
 | `.markdownlint.json`  | Markdownlint configuration file.                                      | No        |
+| `.prettierignore`     | Defines folders or files to not format in Prettier                    | No        |
 | `.prettierrc`         | Prettier configuration file.                                          | No        |
 | `CODE_OF_CONDUCT.md`  | This contains the contributor covenant code of conduct.               | No        |
 | `LICENSE`             | The Gamma Web Server license.                                         | No        |
