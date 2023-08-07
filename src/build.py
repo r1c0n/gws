@@ -17,6 +17,7 @@ GWS_EXE_TILDE_PATH = BIN_PATH / "gws.exe~"
 
 logging.basicConfig(level=logging.INFO)
 
+
 def check_and_close_process(process_name):
     """Check for a process with the given name and close it if found."""
     for proc in psutil.process_iter():
@@ -24,16 +25,19 @@ def check_and_close_process(process_name):
             logging.info(f"Closing {process_name} process (PID: {proc.pid})")
             proc.kill()
 
+
 def create_bin_folder():
     """Create the 'bin' folder if it doesn't exist."""
     if not BIN_PATH.exists():
         BIN_PATH.mkdir()
         logging.info("Bin folder created")
 
+
 def build_project():
     """Build the project files."""
     os.system("go build -buildmode=exe -o ./bin/gws.exe")
     logging.info("Project files built")
+
 
 def create_config_file():
     """Create the 'config.json' file with the given repository configuration."""
@@ -44,13 +48,14 @@ def create_config_file():
         "tls_config": {
             "enabled": False,
             "cert_file": "server.crt",
-            "key_file": "server.key"
+            "key_file": "server.key",
         },
     }
 
     with open(CONFIG_FILE_PATH, "w") as config_file:
         json.dump(config_data, config_file, indent=4)
     logging.info("Config created")
+
 
 def copy_html_files():
     """Copy the HTML template code to the 'bin/html' directory."""
@@ -59,20 +64,28 @@ def copy_html_files():
     shutil.copytree("html", HTML_DIR_PATH)
     logging.info("Template code copied to bin")
 
+
 def zip_bin_contents():
     """Zip the contents of the 'bin' directory (excluding unnecessary files)."""
     if RELEASE_ZIP_PATH.exists():
         RELEASE_ZIP_PATH.unlink()
 
     with zipfile.ZipFile(RELEASE_ZIP_PATH, "w") as zip_file:
-        for foldername, subfolders, filenames in os.walk(BIN_PATH): # DO NOT REMOVE SUBFOLDERS! IT WILL BREAK THE BUILD SCRIPT!!
+        for foldername, subfolders, filenames in os.walk(
+            BIN_PATH
+        ):  # DO NOT REMOVE SUBFOLDERS! IT WILL BREAK THE BUILD SCRIPT!!
             for filename in filenames:
                 file_path = Path(foldername) / filename
                 arcname = file_path.relative_to(BIN_PATH)
-                if arcname.name != "Release.zip" and arcname.name not in ["server.crt", "server.key", ".gws.exe.old"]:
+                if arcname.name != "Release.zip" and arcname.name not in [
+                    "server.crt",
+                    "server.key",
+                    ".gws.exe.old",
+                ]:
                     zip_file.write(file_path, arcname)
 
     logging.info("Content zipped to Release.zip")
+
 
 def remove_gws_exe_tilde():
     """Remove the 'gws.exe~' file if it exists."""
@@ -80,16 +93,21 @@ def remove_gws_exe_tilde():
         GWS_EXE_TILDE_PATH.unlink()
         logging.info("gws.exe~ file removed")
 
-def main(run_dev):
+
+def main(run_dev, no_deploy):
     try:
         check_and_close_process("gws.exe")
         create_bin_folder()
         build_project()
         create_config_file()
         copy_html_files()
-        zip_bin_contents()
-        remove_gws_exe_tilde()
-        logging.info("Build completed")
+        if no_deploy:
+            remove_gws_exe_tilde()
+            logging.info("Build completed")
+        else:
+            zip_bin_contents()
+            remove_gws_exe_tilde()
+            logging.info("Build completed")
 
         if run_dev:
             os.system("run-dev.bat")
@@ -101,9 +119,13 @@ def main(run_dev):
     except Exception as e:
         logging.error(f"Build failed: {e}")
 
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Build and deploy script")
-    parser.add_argument("--run-dev", action="store_true", help="Run run-dev.bat after build")
+    parser.add_argument(
+        "--run-dev", action="store_true", help="Run run-dev.bat after build"
+    )
+    parser.add_argument("--no-deploy", action="store_true", help="Don't zip contents")
     args = parser.parse_args()
 
-    main(args.run_dev)
+    main(args.run_dev, args.no_deploy)
