@@ -21,9 +21,12 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
 
+      - name: Pull latest changes
+        run: git pull origin main
+
       - name: Commit linted changes
         run: |
-          git diff-index --quiet HEAD || git commit -am "Lint code with Black"
+          git diff-index --quiet HEAD || git commit -am "Format Python using Black"
 
       - name: Push changes
         if: github.event_name == 'push'
