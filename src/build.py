@@ -35,13 +35,7 @@ def build_project():
     os.system("go build -buildmode=exe -o ./bin/gws.exe")
     logging.info("Project files built")
 
-def read_repo_config():
-    """Read the repository configuration from 'gws-data.json'."""
-    with open(GWS_DATA_FILE_PATH, "r") as data_file:
-        data = json.load(data_file)
-        return data.get("repo_config")
-
-def create_config_file(repo_config):
+def create_config_file():
     """Create the 'config.json' file with the given repository configuration."""
     config_data = {
         "port": ":8080",
@@ -52,7 +46,6 @@ def create_config_file(repo_config):
             "cert_file": "server.crt",
             "key_file": "server.key"
         },
-        "repo_config": repo_config
     }
 
     with open(CONFIG_FILE_PATH, "w") as config_file:
@@ -92,8 +85,7 @@ def main(run_dev):
         check_and_close_process("gws.exe")
         create_bin_folder()
         build_project()
-        repo_config = read_repo_config()
-        create_config_file(repo_config)
+        create_config_file()
         copy_html_files()
         zip_bin_contents()
         remove_gws_exe_tilde()
