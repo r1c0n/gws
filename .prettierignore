@@ -1,3 +1,5 @@
 src/vendor
 src/bin
 *.html
+*.webmanifest
+CODE_OF_CONDUCT.md
