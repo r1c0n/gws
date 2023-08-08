@@ -39,14 +39,14 @@ def build_project():
     logging.info("Project files built")
 
 
-def create_config_file():
+def create_config_file(enable_ssl):
     """Create the 'config.json' file with the given repository configuration."""
     config_data = {
         "port": ":8080",
         "domain": "localhost",
         "static_dir": "html",
         "tls_config": {
-            "enabled": False,
+            "enabled": enable_ssl,
             "cert_file": "server.crt",
             "key_file": "server.key",
         },
@@ -94,12 +94,12 @@ def remove_gws_exe_tilde():
         logging.info("gws.exe~ file removed")
 
 
-def main(run_dev, no_deploy):
+def main(run_dev, no_deploy, enable_ssl):
     try:
         check_and_close_process("gws.exe")
         create_bin_folder()
         build_project()
-        create_config_file()
+        create_config_file(enable_ssl)
         copy_html_files()
         if no_deploy:
             remove_gws_exe_tilde()
@@ -126,6 +126,9 @@ if __name__ == "__main__":
         "--run-dev", action="store_true", help="Run run-dev.bat after build"
     )
     parser.add_argument("--no-deploy", action="store_true", help="Don't zip contents")
+    parser.add_argument(
+        "--enable-ssl", action="store_true", help="Enable SSL in config"
+    )
     args = parser.parse_args()
 
-    main(args.run_dev, args.no_deploy)
+    main(args.run_dev, args.no_deploy, args.enable_ssl)
