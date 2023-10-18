@@ -6,10 +6,13 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/r1c0n/gws/middleware"
 )
 
 func startServer(config Config) {
 	r := mux.NewRouter()
+
+	r.Use(middleware.LoggingMiddleware, middleware.GzipMiddleware)
 
 	fs := http.FileServer(http.Dir(config.StaticDir))
 	r.PathPrefix("/").Handler(http.StripPrefix("/", fs))
