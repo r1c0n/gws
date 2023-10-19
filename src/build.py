@@ -8,7 +8,6 @@ import psutil
 from pathlib import Path
 
 # Constants
-GWS_DATA_FILE_PATH = "json/gws-data.json"
 BIN_PATH = Path("./bin")
 CONFIG_FILE_PATH = BIN_PATH / "config.json"
 HTML_DIR_PATH = BIN_PATH / "html"
