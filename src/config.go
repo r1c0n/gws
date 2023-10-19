@@ -7,10 +7,10 @@ import (
 )
 
 var (
-	version	string = "1.3 (LTS)"
-	author string = "recon (recon@mail.recon.best)"
-	title string = "Gamma Web Server"
-	repo string = "https://github.com/r1c0n/gws"
+	version string = "1.3 (LTS)"
+	author  string = "recon (recon@mail.recon.best)"
+	title   string = "Gamma Web Server"
+	repo    string = "https://github.com/r1c0n/gws"
 )
 
 type Config struct {
@@ -22,6 +22,10 @@ type Config struct {
 		CertFile string `json:"cert_file"`
 		KeyFile  string `json:"key_file"`
 	} `json:"tls_config"`
+	Middleware struct {
+		LoggingMiddlewareEnabled bool `json:"logging_middleware_enabled"`
+		GzipMiddlewareEnabled    bool `json:"gzip_middleware_enabled"`
+	} `json:"middleware"`
 }
 
 func loadConfig(filename string) Config {

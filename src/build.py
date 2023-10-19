@@ -39,7 +39,7 @@ def build_project():
     logging.info("Project files built")
 
 
-def create_config_file(enable_ssl):
+def create_config_file(enable_ssl, enable_logging_middleware, enable_gzip_middleware):
     """Create the 'config.json' file with the given repository configuration."""
     config_data = {
         "port": ":8080",
@@ -49,6 +49,10 @@ def create_config_file(enable_ssl):
             "enabled": enable_ssl,
             "cert_file": "server.crt",
             "key_file": "server.key",
+        },
+        "middleware": {
+            "logging_middleware_enabled": enable_logging_middleware,
+            "gzip_middleware_enabled": enable_gzip_middleware,
         },
     }
 
@@ -99,7 +103,9 @@ def main(run_dev, no_deploy, enable_ssl):
         check_and_close_process("gws.exe")
         create_bin_folder()
         build_project()
-        create_config_file(enable_ssl)
+        create_config_file(
+            enable_ssl, enable_logging_middleware, enable_gzip_middleware
+        )
         copy_html_files()
         if no_deploy:
             remove_gws_exe_tilde()
@@ -129,6 +135,18 @@ if __name__ == "__main__":
     parser.add_argument(
         "--enable-ssl", action="store_true", help="Enable SSL in config"
     )
+    parser.add_argument(
+        "--middleware",
+        choices=["logging", "gzip", "both"],
+        nargs="+",
+        default=[],
+        help="Enable middleware (logging, gzip, both)",
+    )
     args = parser.parse_args()
+
+    enable_logging_middleware = (
+        "logging" in args.middleware or "both" in args.middleware
+    )
+    enable_gzip_middleware = "gzip" in args.middleware or "both" in args.middleware
 
     main(args.run_dev, args.no_deploy, args.enable_ssl)

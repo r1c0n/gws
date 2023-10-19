@@ -12,7 +12,18 @@ import (
 func startServer(config Config) {
 	r := mux.NewRouter()
 
-	r.Use(middleware.LoggingMiddleware, middleware.GzipMiddleware)
+	if config.Middleware.LoggingMiddlewareEnabled && config.Middleware.GzipMiddlewareEnabled {
+		r.Use(middleware.LoggingMiddleware, middleware.GzipMiddleware)
+	} else {
+		switch {
+		case config.Middleware.LoggingMiddlewareEnabled:
+			r.Use(middleware.LoggingMiddleware)
+		case config.Middleware.GzipMiddlewareEnabled:
+			r.Use(middleware.GzipMiddleware)
+		}
+	}
+
+	//r.Use(middleware.LoggingMiddleware, middleware.GzipMiddleware)
 
 	fs := http.FileServer(http.Dir(config.StaticDir))
 	r.PathPrefix("/").Handler(http.StripPrefix("/", fs))
