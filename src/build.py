@@ -41,7 +41,7 @@ def build_project():
 def create_config_file(enable_ssl, enable_logging_middleware, enable_gzip_middleware):
     """Create the 'config.json' file with the given repository configuration."""
     config_data = {
-        "port": ":8080",
+        "port": ":80",
         "domain": "localhost",
         "static_dir": "html",
         "tls_config": {
