@@ -63,3 +63,9 @@ p {
   font-size: 0.9em;
   opacity: 0.5;
 }
+
+.gws-banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
