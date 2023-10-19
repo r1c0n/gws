@@ -87,7 +87,7 @@ To start `Gamma Web Server`, double click on the `.exe` file, or run it through 
 .\gws.exe
 ```
 
-To see your website, visit the link showed on the command-line below the product information. By default, the link is [localhost:8080](localhost:8080).
+To see your website, visit the link showed on the command-line below the product information. By default, the link is [localhost:80](localhost:80).
 
 ## ⚙️ Configuration
 
