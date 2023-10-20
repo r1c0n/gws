@@ -15,9 +15,10 @@ This is the security policy for Gamma Web Server.
 
 ### Unstable
 
-| Version     | Supported | Date Released   |
-| ----------- | --------- | --------------- |
-| 1.3.0-rc1/2 | :x:       | June 28th, 2023 |
+| Version      | Supported          | Date Released      |
+| ------------ | ------------------ | ------------------ |
+| 1.4.0-beta.1 | :white_check_mark: | October 20th, 2023 |
+| 1.3.0-rc1/2  | :x:                | June 28th, 2023    |
 
 <!-- No unstable versions before v1.3.0-rc1 -->
 
