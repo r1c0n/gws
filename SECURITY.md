@@ -6,12 +6,12 @@ This is the security policy for Gamma Web Server.
 
 ### Stable
 
-| Version   | Supported          | Date Released       |
-| --------- | ------------------ | ------------------- |
-| 1.3 (LTS) | :white_check_mark: | June 29th, 2023     |
-| 1.2       | :white_check_mark: | Unknown             |
-| 1.1       | :x:                | December 24th, 2022 |
-| 1.0       | :x:                | December 23rd, 2022 |
+| Version   | Supported          | Date Released             |
+| --------- | ------------------ | ------------------------- |
+| 1.3 (LTS) | :white_check_mark: | June 29th, 2023           |
+| 1.2       | :white_check_mark: | June 27th, 2023 (e673abe) |
+| 1.1       | :x:                | December 24th, 2022       |
+| 1.0       | :x:                | December 23rd, 2022       |
 
 ### Unstable
 
