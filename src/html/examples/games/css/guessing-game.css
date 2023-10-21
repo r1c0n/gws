@@ -1,0 +1,16 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+.form {
+  margin-bottom: 10px;
+}
+
+.guessField {
+  width: 50px;
+}
+
+.resultParas {
+  margin-top: 10px;
+  font-weight: bold;
+}
