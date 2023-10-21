@@ -1,15 +1,19 @@
+/* set the font family for the entire page */
 body {
   font-family: Arial, sans-serif;
 }
 
+/* add a margin at the bottom for elements with class 'form' */
 .form {
   margin-bottom: 10px;
 }
 
+/* set the width of elements with class 'guessField' to 50px */
 .guessField {
   width: 50px;
 }
 
+/* add top margin and make the text bold for elements with class 'resultParas' */
 .resultParas {
   margin-top: 10px;
   font-weight: bold;
