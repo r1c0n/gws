@@ -37,8 +37,9 @@ func openURL(config Config) {
 	}
 }
 
-func printHeader(config Config) {
+func initializeUI(config Config) {
 	screen.Clear()
+	openURL(config)
 	fmt.Printf("%sHello, World! | %s v%s | Created by %s%s\n",
 		color.YellowString(""), color.GreenString(title),
 		color.CyanString(version), color.MagentaString(author),
