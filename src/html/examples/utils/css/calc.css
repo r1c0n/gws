@@ -1,0 +1,79 @@
+/* styling for the body element */
+body {
+  display: flex; /* use flexbox to align content */
+  justify-content: center; /* center content horizontally */
+  align-items: center; /* center content vertically */
+  height: 100vh; /* set the height of the body to 100% of the viewport height */
+  margin: 0; /* remove default margin */
+  background-color: #f4f4f4; /* set background color to a light gray */
+  font-family: 'Arial', sans-serif; /* set the font family */
+}
+
+/* styling for the calculator container */
+.calculator {
+  width: 300px; /* set a fixed width for the calculator */
+  text-align: center; /* center text content */
+  border-radius: 10px; /* add rounded corners */
+  background-color: #fff; /* set background color to white */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* add a subtle shadow */
+  padding: 20px; /* add some padding around the content */
+}
+
+/* styling for the result input field */
+#result {
+  width: calc(100% - 20px); /* calculate the width minus padding */
+  height: 50px; /* set a fixed height */
+  font-size: 24px; /* set font size */
+  text-align: right; /* align text to the right */
+  margin-bottom: 10px; /* add some space below the input field */
+  border: none; /* remove border */
+  outline: none; /* remove outline on focus */
+  background: #f9f9f9; /* set background color */
+  border-radius: 5px; /* add rounded corners */
+  padding: 10px; /* add padding */
+  box-sizing: border-box; /* include padding in width calculation */
+}
+
+/* styling for buttons */
+button {
+  width: 50px; /* set a fixed width for buttons */
+  height: 50px; /* set a fixed height for buttons */
+  font-size: 20px; /* set font size */
+  margin: 5px; /* add some space around buttons */
+  border: none; /* remove border */
+  border-radius: 5px; /* add rounded corners */
+  cursor: pointer; /* change cursor on hover */
+  transition: background 0.3s ease; /* add transition effect on background change */
+}
+
+/* styling on hover for buttons */
+button:hover {
+  background: #eee; /* change background color on hover */
+}
+
+/* styling for operator buttons */
+button.operator {
+  background: #ff8c00; /* set background color for operator buttons */
+  color: #fff; /* set text color to white */
+}
+
+/* styling on hover for operator buttons */
+button.operator:hover {
+  background: #e07900; /* change background color on hover */
+}
+
+/* styling for double-width buttons */
+button.double {
+  width: 110px; /* set a wider width for double-width buttons */
+}
+
+/* styling on hover for double-width buttons */
+button.double:hover {
+  background: #ddd; /* change background color on hover */
+}
+
+/* styling for the footer */
+.footer {
+  position: fixed; /* fix the position to the bottom of the viewport */
+  bottom: 10px; /* set a distance from the bottom */
+}
