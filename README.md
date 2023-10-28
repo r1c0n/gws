@@ -63,17 +63,7 @@ These are what the different files / directories contain in this repository.
 
 ## 🚧 Build
 
-Building `Gamma Web Server` is easy. Simply navigate to the `src` directory and run the below command in the Windows command prompt.
-
-```ps
-py build.py --run
-```
-
-Alternatively, if you do not want gws.exe to start after building is finished, run the below command.
-
-```ps
-py build.py
-```
+Build documentation has been moved to [/docs/build.md](/docs/build.md).
 
 ## 🚀 Installation
 
