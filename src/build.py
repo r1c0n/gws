@@ -7,6 +7,8 @@ import argparse
 import psutil
 from pathlib import Path
 
+# Please, read /docs/build.md to understand how this Python script works.
+
 # Constants
 BIN_PATH = Path("./bin")
 CONFIG_FILE_PATH = BIN_PATH / "config.json"
