@@ -97,7 +97,7 @@ def remove_gws_exe_tilde():
         logging.info("gws.exe~ file removed")
 
 
-def main(run_dev, no_deploy, enable_ssl):
+def main(run, no_deploy, enable_ssl):
     try:
         check_and_close_process("gws.exe")
         create_bin_folder()
@@ -114,9 +114,9 @@ def main(run_dev, no_deploy, enable_ssl):
             remove_gws_exe_tilde()
             logging.info("Build completed")
 
-        if run_dev:
-            os.system("run-dev.bat")
-            logging.info("run-dev.bat executed")
+        if run:
+            os.system("run.bat")
+            logging.info("run.bat executed")
     except FileNotFoundError as e:
         logging.error(f"File not found: {e}")
     except json.JSONDecodeError as e:
@@ -128,7 +128,7 @@ def main(run_dev, no_deploy, enable_ssl):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Build and deploy script")
     parser.add_argument(
-        "--run-dev", action="store_true", help="Run run-dev.bat after build"
+        "--run", action="store_true", help="Run Gamma Web Server after build"
     )
     parser.add_argument("--no-deploy", action="store_true", help="Don't zip contents")
     parser.add_argument(
@@ -148,4 +148,4 @@ if __name__ == "__main__":
     )
     enable_gzip_middleware = "gzip" in args.middleware or "both" in args.middleware
 
-    main(args.run_dev, args.no_deploy, args.enable_ssl)
+    main(args.run, args.no_deploy, args.enable_ssl)
