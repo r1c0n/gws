@@ -13,7 +13,7 @@ py build.py [--run] [--no-deploy] [--enable-ssl] [--middleware <middleware_type>
 - `--run`: Run Gamma Web Server after build.
 - `--no-deploy`: Do not zip contents for release.
 - `--enable-ssl`: Enable SSL in configuration.
-- `--middleware` : Enable middleware. Options include `logging`, `gzip`, or `both`.
+- `--middleware` : Enable middleware. Options include `logging`, `gzip`, or `all`.
 
 ## Functions 🛠️
 
