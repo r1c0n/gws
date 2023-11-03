@@ -6,24 +6,12 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/r1c0n/gws/middleware"
 )
 
 func startServer(config Config) {
 	r := mux.NewRouter()
 
-	if config.Middleware.LoggingMiddlewareEnabled && config.Middleware.GzipMiddlewareEnabled {
-		r.Use(middleware.LoggingMiddleware, middleware.GzipMiddleware)
-	} else {
-		switch {
-		case config.Middleware.LoggingMiddlewareEnabled:
-			r.Use(middleware.LoggingMiddleware)
-		case config.Middleware.GzipMiddlewareEnabled:
-			r.Use(middleware.GzipMiddleware)
-		}
-	}
-
-	//r.Use(middleware.LoggingMiddleware, middleware.GzipMiddleware)
+	ApplyMiddleware(r, config)
 
 	fs := http.FileServer(http.Dir(config.StaticDir))
 	r.PathPrefix("/").Handler(http.StripPrefix("/", fs))
