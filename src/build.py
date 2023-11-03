@@ -138,16 +138,14 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--middleware",
-        choices=["logging", "gzip", "both"],
+        choices=["logging", "gzip", "all"],
         nargs="+",
         default=[],
-        help="Enable middleware (logging, gzip, both)",
+        help="Enable middleware (logging, gzip, all)",
     )
     args = parser.parse_args()
 
-    enable_logging_middleware = (
-        "logging" in args.middleware or "both" in args.middleware
-    )
-    enable_gzip_middleware = "gzip" in args.middleware or "both" in args.middleware
+    enable_logging_middleware = "logging" in args.middleware or "all" in args.middleware
+    enable_gzip_middleware = "gzip" in args.middleware or "all" in args.middleware
 
     main(args.run, args.no_deploy, args.enable_ssl)
