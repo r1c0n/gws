@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- meta charset and viewport settings -->
+    <meta charset="UTF-8"> <!-- set character encoding to UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- configure viewport for responsive design -->
+    <title>Hangman</title> <!-- set the title of the page -->
+    <!-- include jQuery library from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="./css/hangman.css"> <!-- link to the external css file for styling -->
+</head>
+
+<body>
+    <h1>Hangman Game</h1> <!-- main heading for the game -->
+    <div id="word"></div> <!-- container to display the word with blanks -->
+    <input type="text" id="guess" maxlength="1"> <!-- input field for user's letter guess -->
+    <button id="check">Check</button> <!-- button to submit the guess -->
+    <div id="attempts">Attempts left: 6</div> <!-- display the remaining attempts -->
+    <div id="message"></div> <!-- container for displaying messages to the user -->
+    <hr /> <!-- horizontal line for visual separation -->
+
+    <!-- navigation and copyright information -->
+    <a href="/">Home</a> | Copyright &copy; 2022 - 2023 Gamma Team & <a href="https://github.com/r1c0n/gws"
+        target="_blank">Contributors</a> <!-- navigation links and copyright information with external link -->
+
+    <script src="./js/hangman.js"></script> <!-- include the external js file for game logic -->
+</body>
+
+</html>
