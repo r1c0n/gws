@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/fatih/color v1.15.0
-	github.com/gorilla/mux v1.8.0
+	github.com/gorilla/mux v1.8.1
 	github.com/inancgumus/screen v0.0.0-20190314163918-06e984b86ed3
 )
 
