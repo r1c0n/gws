@@ -36,6 +36,8 @@
 <a href="https://twitter.com/intent/tweet?text=👋%20Check%20out%20this%20amazing%20webserver!%20https://github.com/r1c0n/gws"><img src="https://img.shields.io/twitter/url?label=Share%20on%20Twitter&style=social&url=https%3A%2F%2Fgithub.com%2Fr1c0n%2Fgws"></a>
 </p>
 
+![Alt](https://repobeats.axiom.co/api/embed/6eabbe5b07af02d9e866551848f1d4b0ac35c53a.svg 'Repobeats analytics image')
+
 ## 🔍 File Content
 
 These are what the different files / directories contain in this repository.
