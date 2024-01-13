@@ -7,7 +7,7 @@ import (
 )
 
 var (
-	version string = "1.4.0-beta.2"
+	version string = "1.4.0"
 	author  string = "recon (recon@mail.recon.best)"
 	title   string = "Gamma Web Server"
 	repo    string = "https://github.com/r1c0n/gws"
