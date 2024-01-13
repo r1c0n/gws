@@ -37,14 +37,15 @@ func openURL(config Config) {
 	}
 }
 
-func printHeader(config Config) {
+func initializeUI(config Config) {
 	screen.Clear()
+	openURL(config)
 	fmt.Printf("%sHello, World! | %s v%s | Created by %s%s\n",
-		color.YellowString(""), color.GreenString(config.RepoConfig.Product),
-		color.CyanString(config.RepoConfig.Version), color.MagentaString(config.RepoConfig.Author),
+		color.YellowString(""), color.GreenString(title),
+		color.CyanString(version), color.MagentaString(author),
 		color.YellowString(""))
 	fmt.Printf("To contribute, check out our GitHub repo: %s\n",
-		color.BlueString(config.RepoConfig.Repository))
+		color.BlueString(repo))
 	fmt.Println("----------------------------------------------------------------------------")
 	fmt.Printf("To exit the program, enter the key combination %s\"CTRL + C\"%s.\n",
 		color.RedString(""), color.YellowString(""))

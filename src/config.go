@@ -6,6 +6,13 @@ import (
 	"log"
 )
 
+var (
+	version string = "1.4.0"
+	author  string = "recon (recon@mail.recon.best)"
+	title   string = "Gamma Web Server"
+	repo    string = "https://github.com/r1c0n/gws"
+)
+
 type Config struct {
 	Port      string `json:"port"`
 	Domain    string `json:"domain"`
@@ -15,12 +22,10 @@ type Config struct {
 		CertFile string `json:"cert_file"`
 		KeyFile  string `json:"key_file"`
 	} `json:"tls_config"`
-	RepoConfig struct {
-		Version    string `json:"version"`
-		Author     string `json:"author"`
-		Product    string `json:"product"`
-		Repository string `json:"repository"`
-	} `json:"repo_config"`
+	Middleware struct {
+		LoggingMiddlewareEnabled bool `json:"logging_middleware_enabled"`
+		GzipMiddlewareEnabled    bool `json:"gzip_middleware_enabled"`
+	} `json:"middleware"`
 }
 
 func loadConfig(filename string) Config {

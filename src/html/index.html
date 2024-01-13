@@ -1,83 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="title" content="Gamma — Installation Successful" />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="favicon/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="favicon/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="favicon/favicon-16x16.png"
-    />
-    <link rel="manifest" href="favicon/site.webmanifest" />
-    <link
-      rel="mask-icon"
-      href="favicon/safari-pinned-tab.svg"
-      color="#5bbad5"
-    />
-    <link rel="shortcut icon" href="favicon/favicon.ico" />
-    <meta name="msapplication-TileColor" content="#ffc40d" />
-    <meta name="msapplication-config" content="favicon/browserconfig.xml" />
-    <meta name="theme-color" content="#ffffff" />
-    <link rel="stylesheet" href="style.css" />
-    <title>Installation Successful!</title>
-  </head>
-  <body>
-    <br />
-    <div class="container">
-      <h1 style="vertical-align: middle">
-        Welcome to Gamma Web Server!&nbsp;<img
-          width="42"
-          height="42"
-          src="img/gws-small.png"
-          alt="Gamma Webserver logo small"
-          style="vertical-align: middle"
-        />
-      </h1>
-      <p>
-        Congratulations on setting up Gamma Web Server! This page is being
-        served to you by Gamma Web Server instance and is the default page that
-        is displayed when you launch the server for the first time.
-      </p>
-      <h2>What's Next?</h2>
-      <p>
-        Now that you have Gamma Web Server up and running, you can serve static
-        files such as HTML, CSS, and JavaScript from a specific directory,
-        usually the "html" directory if the directory is not changed within the
-        code.
-      </p>
-      <h3>Editing the Website Content</h3>
-      <p>
-        To edit the content of your website, you can modify the static files in
-        the "html" directory or the handler functions in your Go code. The
-        static files can include HTML, CSS, and JavaScript files, as well as
-        images and other media. You can use a text editor or an integrated
-        development environment (IDE) to edit the files.
-      </p>
-      <!--<h3>Exploring Further</h3>
-        <p>To learn more about Go and web development, you can check out the following resources:</p>
-        <ul>
-            <li>The official Go documentation: <a href="https://golang.org/doc/">https://golang.org/doc/</a></li>
-            <li>The Go by Example website: <a href="https://gobyexample.com/">https://gobyexample.com/</a></li>
-            <li>The Go Web Examples website: <a href="https://gowebexamples.com/">https://gowebexamples.com/</a></li>
-        </ul>-->
-      <p>Thank you for using Gamma Web Server, and happy coding!</p>
-      <div class="copyright">Copyright &copy; 2022 - 2023 Gamma Team</div>
-    </div>
 
-    <script src="javascriptTest.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="title" content="Gamma — Installation Successful" />
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png" />
+  <link rel="manifest" href="favicon/site.webmanifest" />
+  <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5" />
+  <link rel="shortcut icon" href="favicon/favicon.ico" />
+  <meta name="msapplication-TileColor" content="#ffc40d" />
+  <meta name="msapplication-config" content="favicon/browserconfig.xml" />
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Installation Successful!</title>
+</head>
+
+<body>
+  <br />
+  <div class="container">
+    <div class="gws-banner">
+      <img src="./img/gws-wordmark-01.png" alt="gws big" width="200" height="200">
+    </div>
+    <h1 style="vertical-align: middle">
+      Welcome to Gamma Web Server!&nbsp;<img width="42" height="42" src="img/gws-small.png"
+        alt="Gamma Webserver logo small" style="vertical-align: middle" />
+    </h1>
+    <p>
+      Congratulations on setting up Gamma Web Server! This page is being erved to you by your Gamma Web Server
+      instance, and is the default page that is displayed when you launch the server for the first time.
+    </p>
+    <div class="accordion">
+      <div class="accordion-item">
+        <div class="accordion-header">What's Next?</div>
+        <div class="accordion-content">
+          <p>
+            Now that you have your Gamma Web Server instance up and running, you can serve static files such as HTML,
+            CSS, and JavaScript from a specific directory, usually the "html" directory if the directory is not changed
+            within our provided configuration file.
+          </p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header">Editing the Website Content</div>
+        <div class="accordion-content">
+          <p>
+            To edit the content of your website, you can modify the static files in the "html" directory, or delete
+            them and start from scratch. The static files can include HTML, CSS, and JavaScript files, as well as images
+            and other media. You can use a text editor or an integrated development environment (IDE) to edit the files.
+            <a href="./examples/" target="_blank" rel="noopener noreferrer">Here you can find some example code.</a>
+          </p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header">Building Gamma Web Server</div>
+        <div class="accordion-content">
+          <p>
+            Please read our <a href="https://github.com/r1c0n/gws/blob/dev/docs/build.md" target="_blank"> build script
+              documentation on GitHub</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+    <br />
+    <p>Thank you for using Gamma Web Server, and happy coding!</p>
+    <div class="copyright">Copyright &copy; 2022 - 2024 Gamma Team & <a href="https://github.com/r1c0n/gws"
+        target="_blank">Contributors</a>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+  <script src="javascriptTest.js"></script>
+</body>
+
 </html>

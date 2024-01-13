@@ -1,0 +1,41 @@
+/* set the font family and center the text */
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+/* style the heading with a color */
+h1 {
+  color: #333;
+}
+
+/* increase font size for the word display and add some margin */
+#word {
+  font-size: 2em;
+  margin: 20px 0;
+}
+
+/* set font size for the guess input */
+#guess {
+  font-size: 1.5em;
+}
+
+/* style the button with font size, margin, and padding */
+button {
+  font-size: 1.5em;
+  margin-top: 10px;
+  padding: 5px 10px;
+}
+
+/* set font size and margin for attempts display */
+#attempts {
+  font-size: 1.2em;
+  margin-top: 10px;
+}
+
+/* set font size, margin, and color for the message display */
+#message {
+  font-size: 1.2em;
+  margin-top: 20px;
+  color: #ff0000; /* red color for error messages */
+}

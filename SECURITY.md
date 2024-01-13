@@ -4,12 +4,25 @@ This is the security policy for Gamma Web Server.
 
 ## Supported Versions
 
-| Version   | Supported          |
-| --------- | ------------------ |
-| 1.3 (LTS) | :white_check_mark: |
-| 1.2       | :white_check_mark: |
-| 1.1       | :x:                |
-| 1.0       | :x:                |
+### Stable
+
+| Version   | Supported          | Date Released             |
+| --------- | ------------------ | ------------------------- |
+| 1.4 (LTS) | :white_check_mark: | January 12th, 2024        |
+| 1.3       | :x:                | June 29th, 2023           |
+| 1.2       | :x:                | June 27th, 2023 (e673abe) |
+| 1.1       | :x:                | December 24th, 2022       |
+| 1.0       | :x:                | December 23rd, 2022       |
+
+### Unstable
+
+| Version      | Supported | Date Released      |
+| ------------ | --------- | ------------------ |
+| 1.4.0-beta.2 | :x:       | November 6th, 2023 |
+| 1.4.0-beta.1 | :x:       | October 20th, 2023 |
+| 1.3.0-rc1/2  | :x:       | June 28th, 2023    |
+
+<!-- No unstable versions before v1.3.0-rc1 -->
 
 ## Reporting a Vulnerability
 

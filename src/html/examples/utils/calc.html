@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="./css/calc.css"> <!-- link to external CSS file -->
+</head>
+
+<body>
+    <div class="calculator">
+        <input type="text" id="result" readonly> <!-- input field to display result, readonly -->
+        <div class="buttons">
+            <button onclick="appendNumber('7')">7</button> <!-- button to append the number 7 -->
+            <button onclick="appendNumber('8')">8</button> <!-- button to append the number 8 -->
+            <button onclick="appendNumber('9')">9</button> <!-- button to append the number 9 -->
+            <button onclick="appendOperator('+')">+</button> <!-- button to append the + operator -->
+            <button onclick="appendNumber('4')">4</button> <!-- button to append the number 4 -->
+            <button onclick="appendNumber('5')">5</button> <!-- button to append the number 5 -->
+            <button onclick="appendNumber('6')">6</button> <!-- button to append the number 6 -->
+            <button onclick="appendOperator('-')">-</button> <!-- button to append the - operator -->
+            <button onclick="appendNumber('1')">1</button> <!-- button to append the number 1 -->
+            <button onclick="appendNumber('2')">2</button> <!-- button to append the number 2 -->
+            <button onclick="appendNumber('3')">3</button> <!-- button to append the number 3 -->
+            <button onclick="appendOperator('*')">*</button> <!-- button to append the * operator -->
+            <button onclick="appendNumber('0')">0</button> <!-- button to append the number 0 -->
+            <button onclick="appendOperator('.')">.</button> <!-- button to append the . operator -->
+            <button onclick="calculateResult()">=</button> <!-- button to calculate the result -->
+            <button onclick="appendOperator('/')">/</button> <!-- button to append the / operator -->
+            <button onclick="clearResult()">C</button> <!-- button to clear the result -->
+        </div>
+    </div>
+
+    <!-- navigation and copyright information -->
+    <div class="footer">
+        <a href="/">Home</a> | Copyright &copy; 2022 - 2023 Gamma Team & <a href="https://github.com/r1c0n/gws"
+            target="_blank">Contributors</a> <!-- footer with links and copyright information -->
+    </div>
+
+    <script src="./js/calc.js"></script> <!-- link to external JavaScript file -->
+</body>
+
+</html>
