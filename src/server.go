@@ -11,14 +11,10 @@ import (
 func startServer(config Config) {
 	r := mux.NewRouter()
 
+	ApplyMiddleware(r, config)
+
 	fs := http.FileServer(http.Dir(config.StaticDir))
 	r.PathPrefix("/").Handler(http.StripPrefix("/", fs))
-
-	go func() {
-		http.ListenAndServe(":http", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			http.Redirect(w, r, "https://"+r.Host+r.URL.String(), http.StatusMovedPermanently)
-		}))
-	}()
 
 	if config.TLSConfig.Enabled {
 		server := &http.Server{

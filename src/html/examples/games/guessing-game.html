@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- meta charset and viewport settings -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Number Game</title>
+    <link rel="stylesheet" href="./css/guessing-game.css"> <!-- link to the external css file -->
+</head>
+
+<body>
+    <h1>Guess the Number Game</h1>
+    <div class="form">
+        <label for="guessField">Enter a guess: </label>
+        <!-- input field for the user's guess -->
+        <input type="text" id="guessField" class="guessField">
+        <input type="submit" value="Submit guess" class="guessSubmit">
+    </div>
+    <div class="resultParas">
+        <!-- paragraphs to display game results -->
+        <p class="guesses"></p>
+        <p class="lastResult"></p>
+        <p class="lowOrHi"></p>
+    </div>
+    <hr />
+
+    <!-- navigation and copyright information -->
+    <a href="/">Home</a> | Copyright &copy; 2022 - 2023 Gamma Team & <a href="https://github.com/r1c0n/gws"
+        target="_blank">Contributors</a>
+
+    <!-- link to the external js file -->
+    <script src="./js/guessing-game.js"></script>
+</body>
+
+</html>
