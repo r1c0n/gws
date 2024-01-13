@@ -143,7 +143,18 @@ if __name__ == "__main__":
         default=[],
         help="Enable middleware (logging, gzip, all)",
     )
+    parser.add_argument(
+        "--debug",
+        action="store_true",
+        help="Debug build configuration (--run, --enable-ssl, --no-deploy, --middleware all)",
+    )
     args = parser.parse_args()
+
+    if args.debug:
+        args.run = True
+        args.enable_ssl = True
+        args.no_deploy = True
+        args.middleware = ["all"]
 
     enable_logging_middleware = "logging" in args.middleware or "all" in args.middleware
     enable_gzip_middleware = "gzip" in args.middleware or "all" in args.middleware
