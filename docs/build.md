@@ -5,7 +5,7 @@ Building Gamma Web Server is all done through [/src/build.py](/src/build.py). Th
 ## Usage 🚀
 
 ```bash
-py build.py [--run] [--no-deploy] [--enable-ssl] [--middleware <middleware_type> [<middleware_type> ...]]
+py build.py [--run] [--no-deploy] [--enable-ssl] [--debug] [--middleware <middleware_type> [<middleware_type> ...]]
 ```
 
 ### Arguments 📋
@@ -14,6 +14,7 @@ py build.py [--run] [--no-deploy] [--enable-ssl] [--middleware <middleware_type>
 - `--no-deploy`: Do not zip contents for release.
 - `--enable-ssl`: Enable SSL in configuration.
 - `--middleware` : Enable middleware. Options include `logging`, `gzip`, or `all`.
+- `--debug` : Build configuration for debugging. Runs `--run`, `--no-deploy`, and `--middleware all`.
 
 ## Functions 🛠️
 
@@ -52,9 +53,9 @@ Main function to orchestrate the build process. It handles various exceptions su
 ## Example Usage 🚀
 
 ```bash
-python build.py --run --enable-ssl --middleware logging gzip
+python build.py --run --enable-ssl --middleware all
 ```
 
-This command will run the build script, start Gamma Web Server after the build, enable SSL in the configuration, and enable both of the available middleware.
+This command will run the build script, start Gamma Web Server after the build, enable SSL in the configuration, and enable all of the available middleware.
 
-`Note: Please make sure you have the necessary dependencies installed and the project structure set up correctly before running the script.`
+`Note: Please make sure you have the necessary dependencies installed and the project structure set up correctly before running the script!`
