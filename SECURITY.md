@@ -8,6 +8,7 @@ This is the security policy for Gamma Web Server.
 
 | Version   | Supported          | Date Released             |
 | --------- | ------------------ | ------------------------- |
+| 1.4.1     | :white_check_mark: | January 13th, 2024        |
 | 1.4 (LTS) | :white_check_mark: | January 12th, 2024        |
 | 1.3       | :x:                | June 29th, 2023           |
 | 1.2       | :x:                | June 27th, 2023 (e673abe) |
