@@ -1,9 +1,3 @@
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-
-[![All Contributors](https://img.shields.io/github/all-contributors/r1c0n/gws?color=ee8449&style=flat-square)](#contributors)
-
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
-
 <p align="center">
     <a href="https://www.gammaws.gq" target="_blank">
         <img src="./branding/gws-wordmark-01.png" alt="logo" width="125"/>
@@ -14,6 +8,12 @@
 <h4 align="center">A lightweight and fast web server written in Go.</h4>
 
 <p align="center">
+
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
+[![All Contributors](https://img.shields.io/github/all-contributors/r1c0n/gws?color=ee8449&style=flat-square)](#contributors)
+
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 <a href="https://github.com/r1c0n/gws/blob/main/LICENSE" target="blank">
 <img src="https://img.shields.io/github/license/r1c0n/gws?style=flat-square" alt="gws license" />
