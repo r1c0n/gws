@@ -69,7 +69,7 @@ These are what the different files / directories contain in this repository.
 
 ## 🚧 Build
 
-Build documentation has been moved to [/docs/build.md](/docs/build.md).
+Read our build documentation @ [/docs/build.md](/docs/build.md) to learn how to build Gamma Web Server.
 
 ## 🚀 Installation
 
