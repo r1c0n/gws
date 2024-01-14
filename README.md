@@ -44,7 +44,9 @@ These are what the different files / directories contain in this repository.
 
 | File/folder           | Description                                                           | Directory |
 | --------------------- | --------------------------------------------------------------------- | --------- |
+| `.github`             | Contains GitHub related files, such as workflows.                     | Yes       |
 | `branding`            | Contains Gamma artwork.                                               | Yes       |
+| `docs`                | Contains documentation for GWS.                                       | Yes       |
 | `src`                 | Source code of Gamma Web Server.                                      | Yes       |
 | `.all-contributorsrc` | All-Contributors bot configuration file                               | No        |
 | `.gitattributes`      | Defines attribute rules for Git repository.                           | No        |
@@ -52,10 +54,12 @@ These are what the different files / directories contain in this repository.
 | `.markdownlint.json`  | Markdownlint configuration file.                                      | No        |
 | `.prettierignore`     | Defines folders or files to not format in Prettier                    | No        |
 | `.prettierrc`         | Prettier configuration file.                                          | No        |
+| `CHANGELOG.md`        | Contains automatically generated GWS Changelogs.                      | No        |
 | `CODE_OF_CONDUCT.md`  | This contains the contributor covenant code of conduct.               | No        |
 | `LICENSE`             | The Gamma Web Server license.                                         | No        |
 | `README.md`           | Before asking questions, read this file.                              | No        |
 | `SECURITY.md`         | Contains the security policy of Gamma, along with supported versions. | No        |
+| `gen_changelog.cmd`   | Command file for generating changelogs in CHANGELOG.md                | No        |
 
 ## ✨ Features
 
