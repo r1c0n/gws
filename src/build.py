@@ -5,6 +5,7 @@ import os
 import logging
 import argparse
 import psutil
+import platform
 from pathlib import Path
 
 # Please, read /docs/build.md to understand how this Python script works.
@@ -34,16 +35,23 @@ def create_bin_folder():
         logging.info("Bin folder created")
 
 
-def build_project():
+def build_project(linux=False):
     """Build the project files."""
-    os.system("go build -buildmode=exe -o ./bin/gws.exe")
+    if linux: # use if on linux (tested & confirmed working on arch linux)
+        os.system("go build -o ./bin/gws")
+    else:
+        os.system("go build -buildmode=exe -o ./bin/gws.exe")
     logging.info("Project files built")
 
 
 def create_config_file(enable_ssl, enable_logging_middleware, enable_gzip_middleware):
     """Create the 'config.json' file with the given repository configuration."""
+    if platform.system() == "Linux":
+        port = ":8080"  # by default port 80 is protected on linux so we want to use 8080 instead
+    else:
+        port = ":80"  # default to port 80 for other operating systems (basically just windows lol)
     config_data = {
-        "port": ":80",
+        "port": port,
         "domain": "localhost",
         "static_dir": "html",
         "tls_config": {
@@ -99,11 +107,11 @@ def remove_gws_exe_tilde():
         logging.info("gws.exe~ file removed")
 
 
-def main(run, no_deploy, enable_ssl):
+def main(run, no_deploy, enable_ssl, linux):
     try:
         check_and_close_process("gws.exe")
         create_bin_folder()
-        build_project()
+        build_project(linux=linux)
         create_config_file(
             enable_ssl, enable_logging_middleware, enable_gzip_middleware
         )
@@ -117,8 +125,8 @@ def main(run, no_deploy, enable_ssl):
             logging.info("Build completed")
 
         if run:
-            os.system("run.bat")
-            logging.info("run.bat executed")
+            os.system("run.bat" if not linux else "./run.sh")
+            logging.info("Run script executed")
     except FileNotFoundError as e:
         logging.error(f"File not found: {e}")
     except json.JSONDecodeError as e:
@@ -148,6 +156,11 @@ if __name__ == "__main__":
         action="store_true",
         help="Debug build configuration (--run, --enable-ssl, --no-deploy, --middleware all)",
     )
+    parser.add_argument(
+        "--linux",
+        action="store_true",
+        help="Compile the project to work with Linux",
+    )
     args = parser.parse_args()
 
     if args.debug:
@@ -159,4 +172,4 @@ if __name__ == "__main__":
     enable_logging_middleware = "logging" in args.middleware or "all" in args.middleware
     enable_gzip_middleware = "gzip" in args.middleware or "all" in args.middleware
 
-    main(args.run, args.no_deploy, args.enable_ssl)
+    main(args.run, args.no_deploy, args.enable_ssl, args.linux)
