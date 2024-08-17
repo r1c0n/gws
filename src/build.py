@@ -39,7 +39,7 @@ def create_bin_folder():
 
 def build_project(linux=False):
     """Build the project files."""
-    if linux: # use if on linux (tested & confirmed working on arch linux)
+    if linux:  # use if on linux (tested & confirmed working on arch linux)
         os.system("go build -o ./bin/gws")
     else:
         os.system("go build -buildmode=exe -o ./bin/gws.exe")
@@ -87,8 +87,9 @@ def zip_bin_contents(linux=False):
             RELEASE_TAR_PATH.unlink()
 
         with tarfile.open(RELEASE_TAR_PATH, "w:gz") as tar_file:
+            # DO NOT REMOVE SUBFOLDERS! IT WILL BREAK THE BUILD SCRIPT!!
             for foldername, subfolders, filenames in os.walk(BIN_PATH):
-                for filename in filenames:  # DO NOT REMOVE SUBFOLDERS! IT WILL BREAK THE BUILD SCRIPT!!
+                for filename in filenames:
                     file_path = Path(foldername) / filename
                     arcname = file_path.relative_to(BIN_PATH)
                     if arcname.name not in [
@@ -104,16 +105,17 @@ def zip_bin_contents(linux=False):
             RELEASE_ZIP_PATH.unlink()
 
         with zipfile.ZipFile(RELEASE_ZIP_PATH, "w") as zip_file:
-            for foldername, subfolders, filenames in os.walk(BIN_PATH):  # DO NOT REMOVE SUBFOLDERS! IT WILL BREAK THE BUILD SCRIPT!!
+            # DO NOT REMOVE SUBFOLDERS! IT WILL BREAK THE BUILD SCRIPT!!
+            for foldername, subfolders, filenames in os.walk(BIN_PATH):
                 for filename in filenames:
-                        file_path = Path(foldername) / filename
-                        arcname = file_path.relative_to(BIN_PATH)
-                        if arcname.name != "Release.zip" and arcname.name not in[
-                            "server.crt",
-                            "server.key",
-                            ".gws.exe.old",
-                        ]:
-                            zip_file.write(file_path, arcname)
+                    file_path = Path(foldername) / filename
+                    arcname = file_path.relative_to(BIN_PATH)
+                    if arcname.name != "Release.zip" and arcname.name not in [
+                        "server.crt",
+                        "server.key",
+                        ".gws.exe.old",
+                    ]:
+                        zip_file.write(file_path, arcname)
 
         logging.info("Content zipped to Release.zip")
 
