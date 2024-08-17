@@ -1,5 +1,6 @@
 import shutil
 import zipfile
+import tarfile
 import json
 import os
 import logging
@@ -15,6 +16,7 @@ BIN_PATH = Path("./bin")
 CONFIG_FILE_PATH = BIN_PATH / "config.json"
 HTML_DIR_PATH = BIN_PATH / "html"
 RELEASE_ZIP_PATH = BIN_PATH / "Release.zip"
+RELEASE_TAR_PATH = BIN_PATH / "Release.tar.gz"
 GWS_EXE_TILDE_PATH = BIN_PATH / "gws.exe~"
 
 logging.basicConfig(level=logging.INFO)
@@ -78,26 +80,42 @@ def copy_html_files():
     logging.info("Template code copied to bin")
 
 
-def zip_bin_contents():
-    """Zip the contents of the 'bin' directory (excluding unnecessary files)."""
-    if RELEASE_ZIP_PATH.exists():
-        RELEASE_ZIP_PATH.unlink()
+def zip_bin_contents(linux=False):
+    """Zip the contents of the 'bin' directory (or create a tar.gz if on Linux)."""
+    if linux:
+        if RELEASE_TAR_PATH.exists():
+            RELEASE_TAR_PATH.unlink()
 
-    with zipfile.ZipFile(RELEASE_ZIP_PATH, "w") as zip_file:
-        for foldername, subfolders, filenames in os.walk(
-            BIN_PATH
-        ):  # DO NOT REMOVE SUBFOLDERS! IT WILL BREAK THE BUILD SCRIPT!!
-            for filename in filenames:
-                file_path = Path(foldername) / filename
-                arcname = file_path.relative_to(BIN_PATH)
-                if arcname.name != "Release.zip" and arcname.name not in [
-                    "server.crt",
-                    "server.key",
-                    ".gws.exe.old",
-                ]:
-                    zip_file.write(file_path, arcname)
+        with tarfile.open(RELEASE_TAR_PATH, "w:gz") as tar_file:
+            for foldername, subfolders, filenames in os.walk(BIN_PATH):
+                for filename in filenames:  # DO NOT REMOVE SUBFOLDERS! IT WILL BREAK THE BUILD SCRIPT!!
+                    file_path = Path(foldername) / filename
+                    arcname = file_path.relative_to(BIN_PATH)
+                    if arcname.name not in [
+                        "Release.tar.gz",
+                        "server.crt",
+                        "server.key",
+                        ".gws.exe.old",
+                    ]:
+                        tar_file.add(file_path, arcname)
+        logging.info("Content archived to Release.tar.gz")
+    else:
+        if RELEASE_ZIP_PATH.exists():
+            RELEASE_ZIP_PATH.unlink()
 
-    logging.info("Content zipped to Release.zip")
+        with zipfile.ZipFile(RELEASE_ZIP_PATH, "w") as zip_file:
+            for foldername, subfolders, filenames in os.walk(BIN_PATH):  # DO NOT REMOVE SUBFOLDERS! IT WILL BREAK THE BUILD SCRIPT!!
+                for filename in filenames:
+                        file_path = Path(foldername) / filename
+                        arcname = file_path.relative_to(BIN_PATH)
+                        if arcname.name != "Release.zip" and arcname.name not in[
+                            "server.crt",
+                            "server.key",
+                            ".gws.exe.old",
+                        ]:
+                            zip_file.write(file_path, arcname)
+
+        logging.info("Content zipped to Release.zip")
 
 
 def remove_gws_exe_tilde():
@@ -120,7 +138,7 @@ def main(run, no_deploy, enable_ssl, linux):
             remove_gws_exe_tilde()
             logging.info("Build completed")
         else:
-            zip_bin_contents()
+            zip_bin_contents(linux=linux)
             remove_gws_exe_tilde()
             logging.info("Build completed")
 
