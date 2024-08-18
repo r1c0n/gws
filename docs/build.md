@@ -27,7 +27,7 @@ Checks for a process with the given name and closes it if found.
 
 Creates the 'bin' folder if it doesn't exist.
 
-### `build_project()`
+### `build_project(linux=linux)`
 
 Builds the project files.
 
@@ -39,7 +39,7 @@ Creates the 'config.json' file with the given repository configuration.
 
 Copies the HTML template code to the 'bin/html' directory.
 
-### `zip_bin_contents()`
+### `zip_bin_contents(linux=linux)`
 
 Zips the contents of the 'bin' directory (excluding unnecessary files).
 
@@ -47,7 +47,7 @@ Zips the contents of the 'bin' directory (excluding unnecessary files).
 
 Removes the 'gws.exe~' file if it exists.
 
-### `main(run, no_deploy, enable_ssl)`
+### `main(run, no_deploy, enable_ssl, linux)`
 
 Main function to orchestrate the build process. It handles various exceptions such as file not found errors and JSON decoding errors.
 
