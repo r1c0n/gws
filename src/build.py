@@ -42,7 +42,10 @@ def build_project(linux=False):
     if linux:  # use if on linux (tested & confirmed working on arch linux)
         os.system("go build -o ./bin/gws")
     else:
+        logging.info("Building gws.exe")
         os.system("go build -buildmode=exe -o ./bin/gws.exe")
+        logging.info("Bulding gwsvc.exe")
+        os.system("go build -buildmode=exe -ldflags -H=windowsgui -o ./bin/gwsvc.exe")
     logging.info("Project files built")
 
 
@@ -127,13 +130,15 @@ def remove_gws_exe_tilde():
         logging.info("gws.exe~ file removed")
 
 
-def main(run, no_deploy, enable_ssl, linux):
+def main(run, no_deploy, enable_ssl, linux, run_headless):
     try:
         check_and_close_process("gws.exe")
         create_bin_folder()
         build_project(linux=linux)
         create_config_file(
-            enable_ssl, enable_logging_middleware, enable_gzip_middleware
+            enable_ssl,
+            enable_logging_middleware,
+            enable_gzip_middleware,
         )
         copy_html_files()
         if no_deploy:
@@ -147,6 +152,9 @@ def main(run, no_deploy, enable_ssl, linux):
         if run:
             os.system("run.bat" if not linux else "./run.sh")
             logging.info("Run script executed")
+        elif run_headless:
+            os.system("run.bat -h")
+            logging.info("Run headless script executed")
     except FileNotFoundError as e:
         logging.error(f"File not found: {e}")
     except json.JSONDecodeError as e:
@@ -171,6 +179,11 @@ if __name__ == "__main__":
         default=[],
         help="Enable middleware (logging, gzip, all)",
     )
+
+    parser.add_argument(
+        "--run-headless", action="store_true", help="Run in headless mode"
+    )
+
     parser.add_argument(
         "--debug",
         action="store_true",
@@ -192,4 +205,10 @@ if __name__ == "__main__":
     enable_logging_middleware = "logging" in args.middleware or "all" in args.middleware
     enable_gzip_middleware = "gzip" in args.middleware or "all" in args.middleware
 
-    main(args.run, args.no_deploy, args.enable_ssl, args.linux)
+    main(
+        args.run,
+        args.no_deploy,
+        args.enable_ssl,
+        args.linux,
+        args.run_headless,
+    )
