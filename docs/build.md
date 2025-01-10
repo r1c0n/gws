@@ -5,12 +5,13 @@ Building Gamma Web Server is all done through [/src/build.py](/src/build.py). Th
 ## Usage 🚀
 
 ```bash
-py build.py [--run] [--no-deploy] [--enable-ssl] [--linux] [--debug] [--middleware <middleware_type> [<middleware_type> ...]]
+py build.py [--run] [--run-headless] [--no-deploy] [--enable-ssl] [--linux] [--debug] [--middleware <middleware_type> [<middleware_type> ...]]
 ```
 
 ### Arguments 📋
 
 - `--run`: Run Gamma Web Server after build.
+- `--run-headless`: Run Gamma Web Server headless version after build.
 - `--no-deploy`: Do not zip contents for release.
 - `--enable-ssl`: Enable SSL in configuration.
 - `--middleware` : Enable middleware. Options include `logging`, `gzip`, or `all`.
