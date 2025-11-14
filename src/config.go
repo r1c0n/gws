@@ -26,6 +26,11 @@ type Config struct {
 		LoggingMiddlewareEnabled bool `json:"logging_middleware_enabled"`
 		GzipMiddlewareEnabled    bool `json:"gzip_middleware_enabled"`
 	} `json:"middleware"`
+	ErrorPages struct {
+		Enabled       bool              `json:"enabled"`
+		ErrorPagesDir string            `json:"error_pages_dir"`
+		Pages         map[string]string `json:"pages"`
+	} `json:"error_pages"`
 }
 
 func loadConfig(filename string) Config {

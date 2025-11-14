@@ -68,6 +68,15 @@ def create_config_file(enable_ssl, enable_logging_middleware, enable_gzip_middle
             "logging_middleware_enabled": enable_logging_middleware,
             "gzip_middleware_enabled": enable_gzip_middleware,
         },
+        "error_pages": {
+            "enabled": True,
+            "error_pages_dir": "html/errors",
+            "pages": {
+                "404": "404.html",
+                "500": "500.html",
+                "403": "403.html",
+            },
+        },
     }
 
     with open(CONFIG_FILE_PATH, "w") as config_file:
