@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CORS Test</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background: #f5f5f5;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .success {
+            color: green;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>CORS Test for Gamma Web Server</h1>
+    <p>This page tests CORS by making requests to your GWS server from a different origin (port).</p>
+
+    <h3>Instructions:</h3>
+    <ol>
+        <li>Make sure GWS is running on port 80 (localhost)</li>
+        <li>Open this file using a different port or server (e.g., <code>python -m http.server 8000</code>)</li>
+        <li>Enable CORS in config.json by setting <code>"cors": { "enabled": true }</code></li>
+        <li>Click the buttons below to test</li>
+    </ol>
+
+    <button onclick="testCORS()">Test GET Request</button>
+    <button onclick="testPreflight()">Test Preflight (OPTIONS)</button>
+    <button onclick="testHeaders()">Test Custom Headers</button>
+
+    <div id="result"></div>
+
+    <script>
+        const serverUrl = 'http://localhost';
+        const resultDiv = document.getElementById('result');
+
+        function log(message, isError = false) {
+            const time = new Date().toLocaleTimeString();
+            resultDiv.innerHTML += `<div class="${isError ? 'error' : 'success'}">[${time}] ${message}</div>`;
+        }
+
+        async function testCORS() {
+            resultDiv.innerHTML = '';
+            log('Testing basic GET request...');
+            try {
+                const response = await fetch(serverUrl);
+                const text = await response.text();
+                log('✓ CORS GET request successful!');
+                log(`Status: ${response.status}`);
+                log(`CORS Headers:`);
+                log(`  Access-Control-Allow-Origin: ${response.headers.get('Access-Control-Allow-Origin')}`);
+                log(`Response preview: ${text.substring(0, 200)}...`);
+            } catch (error) {
+                log(`✗ CORS GET request failed: ${error.message}`, true);
+                log('Make sure CORS is enabled in config.json', true);
+            }
+        }
+
+        async function testPreflight() {
+            resultDiv.innerHTML = '';
+            log('Testing preflight OPTIONS request...');
+            try {
+                const response = await fetch(serverUrl, {
+                    method: 'OPTIONS',
+                    headers: {
+                        'Access-Control-Request-Method': 'POST',
+                        'Access-Control-Request-Headers': 'Content-Type'
+                    }
+                });
+                log('✓ OPTIONS preflight request successful!');
+                log(`Status: ${response.status}`);
+                log(`CORS Headers:`);
+                log(`  Access-Control-Allow-Origin: ${response.headers.get('Access-Control-Allow-Origin')}`);
+                log(`  Access-Control-Allow-Methods: ${response.headers.get('Access-Control-Allow-Methods')}`);
+                log(`  Access-Control-Allow-Headers: ${response.headers.get('Access-Control-Allow-Headers')}`);
+                log(`  Access-Control-Max-Age: ${response.headers.get('Access-Control-Max-Age')}`);
+            } catch (error) {
+                log(`✗ OPTIONS request failed: ${error.message}`, true);
+            }
+        }
+
+        async function testHeaders() {
+            resultDiv.innerHTML = '';
+            log('Testing request with custom headers...');
+            try {
+                const response = await fetch(serverUrl, {
+                    method: 'GET',
+                    headers: {
+                        'X-Custom-Header': 'test-value',
+                        'Content-Type': 'application/json'
+                    }
+                });
+                log('✓ Request with custom headers successful!');
+                log(`Status: ${response.status}`);
+                log(`CORS Headers:`);
+                log(`  Access-Control-Allow-Origin: ${response.headers.get('Access-Control-Allow-Origin')}`);
+            } catch (error) {
+                log(`✗ Request failed: ${error.message}`, true);
+                log('Custom headers might not be in allowed_headers', true);
+            }
+        }
+    </script>
+</body>
+
+</html>

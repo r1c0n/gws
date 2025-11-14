@@ -77,6 +77,14 @@ def create_config_file(enable_ssl, enable_logging_middleware, enable_gzip_middle
                 "403": "403.html",
             },
         },
+        "cors": {
+            "enabled": False,
+            "allowed_origins": ["*"],
+            "allowed_methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+            "allowed_headers": ["Content-Type", "Authorization", "X-Custom-Header"],
+            "allow_credentials": False,
+            "max_age": 3600,
+        },
     }
 
     with open(CONFIG_FILE_PATH, "w") as config_file:

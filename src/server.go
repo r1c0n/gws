@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 
 	"github.com/gorilla/mux"
+	"github.com/r1c0n/gws/middleware"
 )
 
 type notFoundInterceptor struct {
@@ -64,16 +65,43 @@ func handle404(handler http.Handler, config Config) http.Handler {
 func startServer(config Config) {
 	r := mux.NewRouter()
 
-	ApplyMiddleware(r, config)
-
 	fs := http.FileServer(http.Dir(config.StaticDir))
 
 	// Wrap file server with 404 interceptor if error pages are enabled
+	var handler http.Handler
 	if config.ErrorPages.Enabled {
-		r.PathPrefix("/").Handler(http.StripPrefix("/", handle404(fs, config)))
+		handler = http.StripPrefix("/", handle404(fs, config))
 	} else {
-		r.PathPrefix("/").Handler(http.StripPrefix("/", fs))
+		handler = http.StripPrefix("/", fs)
 	}
+
+	// Apply CORS manually to the file server handler
+	if config.CORS.Enabled {
+		corsConfig := middleware.CORSConfig{
+			Enabled:          config.CORS.Enabled,
+			AllowedOrigins:   config.CORS.AllowedOrigins,
+			AllowedMethods:   config.CORS.AllowedMethods,
+			AllowedHeaders:   config.CORS.AllowedHeaders,
+			AllowCredentials: config.CORS.AllowCredentials,
+			MaxAge:           config.CORS.MaxAge,
+		}
+		handler = middleware.CORSMiddleware(corsConfig)(handler)
+	}
+
+	// Apply logging middleware
+	if config.Middleware.LoggingMiddlewareEnabled {
+		if err := middleware.InitLogFiles(); err != nil {
+			log.Fatalf("Could not initialize log files: %v", err)
+		}
+		handler = middleware.LoggingMiddleware(handler)
+	}
+
+	// Apply gzip middleware
+	if config.Middleware.GzipMiddlewareEnabled {
+		handler = middleware.GzipMiddleware(handler)
+	}
+
+	r.PathPrefix("/").Handler(handler)
 
 	if config.TLSConfig.Enabled {
 		server := &http.Server{

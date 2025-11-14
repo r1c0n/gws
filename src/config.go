@@ -31,6 +31,14 @@ type Config struct {
 		ErrorPagesDir string            `json:"error_pages_dir"`
 		Pages         map[string]string `json:"pages"`
 	} `json:"error_pages"`
+	CORS struct {
+		Enabled          bool     `json:"enabled"`
+		AllowedOrigins   []string `json:"allowed_origins"`
+		AllowedMethods   []string `json:"allowed_methods"`
+		AllowedHeaders   []string `json:"allowed_headers"`
+		AllowCredentials bool     `json:"allow_credentials"`
+		MaxAge           int      `json:"max_age"`
+	} `json:"cors"`
 }
 
 func loadConfig(filename string) Config {
