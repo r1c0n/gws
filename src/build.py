@@ -98,7 +98,7 @@ def create_config_file(enable_ssl, enable_logging_middleware, enable_gzip_middle
     }
 
     with open(CONFIG_FILE_PATH, "w") as config_file:
-        json.dump(config_data, config_file, indent=4)
+        json.dump(config_data, config_file, indent=4, ensure_ascii=False)
     logging.info("Config created")
 
 
@@ -140,7 +140,8 @@ def zip_bin_contents(linux=False):
                 for filename in filenames:
                     file_path = Path(foldername) / filename
                     arcname = file_path.relative_to(BIN_PATH)
-                    if arcname.name != "Release.zip" and arcname.name not in [
+                    if arcname.name not in [
+                        "Release.zip",
                         "server.crt",
                         "server.key",
                         ".gws.exe.old",
@@ -159,7 +160,9 @@ def remove_gws_exe_tilde():
 
 def main(run, no_deploy, enable_ssl, linux, run_headless):
     try:
-        check_and_close_process("gws.exe")
+        # Close running GWS process if exists (platform-specific name)
+        process_name = "gws" if linux else "gws.exe"
+        check_and_close_process(process_name)
         create_bin_folder()
         build_project(linux=linux)
         create_config_file(
@@ -191,7 +194,9 @@ def main(run, no_deploy, enable_ssl, linux, run_headless):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Build and deploy script")
+    parser = argparse.ArgumentParser(
+        description="Build and deploy script for Gamma Web Server"
+    )
     parser.add_argument(
         "--run", action="store_true", help="Run Gamma Web Server after build"
     )
