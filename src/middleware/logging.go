@@ -1,10 +1,60 @@
 package middleware
 
 import (
+	"io"
 	"log"
 	"net/http"
+	"os"
+	"path/filepath"
 	"time"
 )
+
+var (
+	sessionLogFile  *os.File
+	realtimeLogFile *os.File
+	logFilePath     string
+	realtimeLogPath = "logs/realtimelogs.log"
+)
+
+// InitLogFiles creates and initializes session and realtime log files
+func InitLogFiles() error {
+	// create logs directory if it doesn't exist
+	logDir := "logs"
+	if err := os.MkdirAll(logDir, os.ModePerm); err != nil {
+		return err
+	}
+
+	// create the session log file with a timestamped name
+	logFileName := time.Now().Format("2006-01-02-15-04-05") + ".log"
+	logFilePath = filepath.Join(logDir, logFileName)
+	var err error
+	sessionLogFile, err = os.OpenFile(logFilePath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+	if err != nil {
+		return err
+	}
+
+	// clear the realtimelogs.log file
+	realtimeLogFile, err = os.OpenFile(realtimeLogPath, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0666)
+	if err != nil {
+		return err
+	}
+
+	// set log output to the session log file and also to realtime log file
+	log.SetOutput(sessionLogFile)
+	multiWriter := io.MultiWriter(sessionLogFile, realtimeLogFile)
+	log.SetOutput(multiWriter)
+
+	return nil
+}
+
+func CloseLogFiles() {
+	if sessionLogFile != nil {
+		sessionLogFile.Close()
+	}
+	if realtimeLogFile != nil {
+		realtimeLogFile.Close()
+	}
+}
 
 type responseLogger struct {
 	http.ResponseWriter
@@ -16,6 +66,7 @@ func (rl *responseLogger) WriteHeader(status int) {
 	rl.ResponseWriter.WriteHeader(status)
 }
 
+// LoggingMiddleware logs all HTTP requests with method, path, and timestamp
 func LoggingMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		// record the current time

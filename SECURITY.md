@@ -6,14 +6,15 @@ This is the security policy for Gamma Web Server.
 
 ### Stable
 
-| Version   | Supported          | Date Released             |
-| --------- | ------------------ | ------------------------- |
-| 1.4.1     | :white_check_mark: | January 13th, 2024        |
-| 1.4 (LTS) | :white_check_mark: | January 12th, 2024        |
-| 1.3       | :x:                | June 29th, 2023           |
-| 1.2       | :x:                | June 27th, 2023 (e673abe) |
-| 1.1       | :x:                | December 24th, 2022       |
-| 1.0       | :x:                | December 23rd, 2022       |
+| Version     | Supported          | Date Released             |
+| ----------- | ------------------ | ------------------------- |
+| 1.5.0 (LTS) | :white_check_mark: | November 16th, 2025       |
+| 1.4.1       | :x:                | January 13th, 2024        |
+| 1.4 (LTS)   | :white_check_mark: | January 12th, 2024        |
+| 1.3         | :x:                | June 29th, 2023           |
+| 1.2         | :x:                | June 27th, 2023 (e673abe) |
+| 1.1         | :x:                | December 24th, 2022       |
+| 1.0         | :x:                | December 23rd, 2022       |
 
 ### Unstable
 
@@ -24,6 +25,37 @@ This is the security policy for Gamma Web Server.
 | 1.3.0-rc1/2  | :x:       | June 28th, 2023    |
 
 <!-- No unstable versions before v1.3.0-rc1 -->
+
+## Version Support Policy
+
+We are committed to maintaining the security and stability of Gamma Web Server. Our version support policy is as follows:
+
+- **Latest Stable Release**: Always receives security updates and bug fixes until the next stable release.
+- **LTS (Long-Term Support)**: Designated versions receive extended security support for **24 months** from release date.
+- **Previous Stable Release**: Receives security updates for critical vulnerabilities for **6 months** after the next stable release.
+- **Older Versions**: No longer supported once EOL is reached. Users are strongly encouraged to upgrade to the latest stable or LTS version.
+- **Unstable/Beta/RC Versions**: Not supported for production use. Reach EOL immediately upon stable release. Security updates are not guaranteed.
+
+### End-of-Life (EOL) Schedule
+
+| Version     | Release Date      | EOL Date                | Reason                   |
+| ----------- | ----------------- | ----------------------- | ------------------------ |
+| 1.5.0 (LTS) | November 16, 2025 | November 16, 2027       | 24 months from release   |
+| 1.4.1       | January 13, 2024  | November 16, 2025 (EOL) | Superseded by v1.5.0 LTS |
+| 1.4 (LTS)   | January 12, 2024  | January 12, 2026        | 24 months from release   |
+| 1.3         | June 29, 2023     | January 13, 2024 (EOL)  | Superseded by v1.4.1     |
+| 1.2         | June 27, 2023     | December 29, 2023 (EOL) | Superseded by v1.3       |
+
+**Note**: EOL dates are approximate and subject to change.
+
+### Discontinuation Notice
+
+When a version reaches end-of-life (EOL) and is no longer supported:
+
+- It will be marked with :x: in the supported versions table above
+- No further security patches or updates will be provided
+- Users should migrate to a supported version as soon as possible
+- Known vulnerabilities in discontinued versions will be documented but not patched
 
 ## Reporting a Vulnerability
 

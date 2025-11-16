@@ -1,5 +1,6 @@
 src/vendor
 src/bin
+src/gws-venv
 *.html
 *.webmanifest
 CODE_OF_CONDUCT.md

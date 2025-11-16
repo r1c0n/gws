@@ -10,7 +10,9 @@
 <p align="center">
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 <a href="https://github.com/r1c0n/gws/blob/main/LICENSE" target="blank">
@@ -62,6 +64,11 @@ These are what the different files / directories contain in this repository.
 ## ✨ Features
 
 - Supports `HTTP` and `HTTPS`
+- Custom error pages (404, 403, 500, 429)
+- CORS support with configurable origins and headers
+- Rate limiting with IP-based token bucket algorithm
+- Gzip compression middleware
+- Request logging middleware
 - Easy & quick setup
 - Easy to use configuration file
 
@@ -92,16 +99,41 @@ Here is an example of what the **config.json** should look like.
 ```json
 {
   "port": ":80",
+  "domain": "localhost",
+  "static_dir": "html",
   "tls_config": {
+    "enabled": false,
     "cert_file": "server.crt",
     "key_file": "server.key"
   },
-  "static_dir": "public",
-  "repo_config": {
-    "version": "1.1.0",
-    "author": "Official B",
-    "product": "Gamma Web Server",
-    "repository": "https://github.com/gamma-gws/gws"
+  "middleware": {
+    "logging_middleware_enabled": false,
+    "gzip_middleware_enabled": false
+  },
+  "error_pages": {
+    "enabled": true,
+    "error_pages_dir": "html/errors",
+    "pages": {
+      "404": "404.html",
+      "500": "500.html",
+      "403": "403.html",
+      "429": "429.html"
+    }
+  },
+  "cors": {
+    "enabled": false,
+    "allowed_origins": ["*"],
+    "allowed_methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    "allowed_headers": ["Content-Type", "Authorization"],
+    "allow_credentials": false,
+    "max_age": 3600
+  },
+  "rate_limit": {
+    "enabled": false,
+    "requests_per_minute": 100,
+    "burst": 20,
+    "whitelist": ["127.0.0.1", "::1"],
+    "exempt_paths": ["/html/", "/favicon/"]
   }
 }
 ```

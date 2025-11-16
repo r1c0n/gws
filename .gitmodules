@@ -1,0 +1,3 @@
+[submodule "src/gws.cpanel"]
+	path = src/gws.cpanel
+	url = https://github.com/r1c0n/gws.cpanel
