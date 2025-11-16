@@ -9,8 +9,11 @@
 - Custom error pages with branded GWS styling (404, 403, 500, 429)
 - CORS middleware with configurable origins, methods, headers, and preflight support
 - Rate limiting middleware with token bucket algorithm, IP-based limiting, and path exemptions
-- Enhanced build script with `--debug` and `--debug-ssl` flags
+- Headless mode support for server operation without UI
+- Linux build support with platform-specific release packages
+- Enhanced build script with `--debug`, `--debug-ssl`, and `--deploy` flags
 - Improved port configuration (443 for SSL, 8443 for Linux SSL)
+- Platform-specific release packages (Release-Windows.zip and Release-Linux.tar.gz)
 
 **Bug Fixes:**
 
