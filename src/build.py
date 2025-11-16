@@ -54,7 +54,10 @@ def create_config_file(enable_ssl, enable_logging_middleware, enable_gzip_middle
     if platform.system() == "Linux":
         port = ":8080"  # by default port 80 is protected on linux so we want to use 8080 instead
     else:
-        port = ":80"  # default to port 80 for other operating systems (basically just windows lol)
+        if enable_ssl:
+            port = ":443"  # use port 443 for HTTPS when SSL is enabled
+        else:
+            port = ":80"  # default to port 80 for HTTP
     config_data = {
         "port": port,
         "domain": "localhost",
