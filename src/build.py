@@ -75,6 +75,7 @@ def create_config_file(enable_ssl, enable_logging_middleware, enable_gzip_middle
                 "404": "404.html",
                 "500": "500.html",
                 "403": "403.html",
+                "429": "429.html",
             },
         },
         "cors": {
@@ -84,6 +85,13 @@ def create_config_file(enable_ssl, enable_logging_middleware, enable_gzip_middle
             "allowed_headers": ["Content-Type", "Authorization", "X-Custom-Header"],
             "allow_credentials": False,
             "max_age": 3600,
+        },
+        "rate_limit": {
+            "enabled": False,
+            "requests_per_minute": 100,
+            "burst": 20,
+            "whitelist": ["127.0.0.1", "::1"],
+            "exempt_paths": ["/html/", "/favicon/"],
         },
     }
 

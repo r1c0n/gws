@@ -39,6 +39,13 @@ type Config struct {
 		AllowCredentials bool     `json:"allow_credentials"`
 		MaxAge           int      `json:"max_age"`
 	} `json:"cors"`
+	RateLimit struct {
+		Enabled           bool     `json:"enabled"`
+		RequestsPerMinute int      `json:"requests_per_minute"`
+		Burst             int      `json:"burst"`
+		Whitelist         []string `json:"whitelist"`
+		ExemptPaths       []string `json:"exempt_paths"`
+	} `json:"rate_limit"`
 }
 
 func loadConfig(filename string) Config {

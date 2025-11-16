@@ -67,15 +67,37 @@ func startServer(config Config) {
 
 	fs := http.FileServer(http.Dir(config.StaticDir))
 
-	// Wrap file server with 404 interceptor if error pages are enabled
-	var handler http.Handler
-	if config.ErrorPages.Enabled {
-		handler = http.StripPrefix("/", handle404(fs, config))
-	} else {
-		handler = http.StripPrefix("/", fs)
+	// Start with the file server
+	var handler http.Handler = http.StripPrefix("/", fs)
+
+	// Apply logging middleware (innermost - closest to handler)
+	if config.Middleware.LoggingMiddlewareEnabled {
+		if err := middleware.InitLogFiles(); err != nil {
+			log.Fatalf("Could not initialize log files: %v", err)
+		}
+		handler = middleware.LoggingMiddleware(handler)
 	}
 
-	// Apply CORS manually to the file server handler
+	// Apply rate limiting middleware
+	if config.RateLimit.Enabled {
+		errorPagePath := ""
+		if config.ErrorPages.Enabled {
+			if pageName, exists := config.ErrorPages.Pages["429"]; exists {
+				errorPagePath = filepath.Join(config.ErrorPages.ErrorPagesDir, pageName)
+			}
+		}
+		rateLimitConfig := middleware.RateLimitConfig{
+			Enabled:           config.RateLimit.Enabled,
+			RequestsPerMinute: config.RateLimit.RequestsPerMinute,
+			Burst:             config.RateLimit.Burst,
+			Whitelist:         config.RateLimit.Whitelist,
+			ExemptPaths:       config.RateLimit.ExemptPaths,
+			ErrorPagePath:     errorPagePath,
+		}
+		handler = middleware.RateLimitMiddleware(rateLimitConfig)(handler)
+	}
+
+	// Apply CORS middleware
 	if config.CORS.Enabled {
 		corsConfig := middleware.CORSConfig{
 			Enabled:          config.CORS.Enabled,
@@ -88,17 +110,14 @@ func startServer(config Config) {
 		handler = middleware.CORSMiddleware(corsConfig)(handler)
 	}
 
-	// Apply logging middleware
-	if config.Middleware.LoggingMiddlewareEnabled {
-		if err := middleware.InitLogFiles(); err != nil {
-			log.Fatalf("Could not initialize log files: %v", err)
-		}
-		handler = middleware.LoggingMiddleware(handler)
-	}
-
 	// Apply gzip middleware
 	if config.Middleware.GzipMiddlewareEnabled {
 		handler = middleware.GzipMiddleware(handler)
+	}
+
+	// Wrap with 404 interceptor
+	if config.ErrorPages.Enabled {
+		handler = handle404(handler, config)
 	}
 
 	r.PathPrefix("/").Handler(handler)
