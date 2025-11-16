@@ -13,11 +13,11 @@ py build.py [--run] [--run-headless] [--no-deploy] [--enable-ssl] [--linux] [--d
 - `--run`: Run Gamma Web Server after build.
 - `--run-headless`: Run Gamma Web Server headless version after build.
 - `--no-deploy`: Do not zip contents for release.
-- `--enable-ssl`: Enable SSL in configuration.
-- `--middleware` : Enable middleware. Options include `logging`, `gzip`, or `all`.
+- `--enable-ssl`: Enable SSL in configuration (uses port 443).
+- `--middleware` : Enable middleware. Options include `logging`, `gzip`, `cors`, `ratelimit`, or `all`.
 - `--linux` : Compiles Gamma Web Server for Linux instead of Windows.
-- `--debug` : Build configuration for debugging. Runs `--run`, `--no-deploy`, and `--middleware all`.
-- `--debug-ssl` : Build configuration for debugging with SSL. Runs `--run`, `--enable-ssl`, `--no-deploy`, and `--middleware all`.
+- `--debug` : Build configuration for debugging. Runs `--run`, `--no-deploy`, and `--middleware all` (port 80).
+- `--debug-ssl` : Build configuration for debugging with SSL. Runs `--run`, `--enable-ssl`, `--no-deploy`, and `--middleware all` (port 443).
 
 ## Functions 🛠️
 

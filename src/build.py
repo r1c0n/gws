@@ -49,7 +49,13 @@ def build_project(linux=False):
     logging.info("Project files built")
 
 
-def create_config_file(enable_ssl, enable_logging_middleware, enable_gzip_middleware):
+def create_config_file(
+    enable_ssl,
+    enable_logging_middleware,
+    enable_gzip_middleware,
+    enable_cors,
+    enable_rate_limit,
+):
     """Create the 'config.json' file with the given repository configuration."""
     if platform.system() == "Linux":
         # By default port 80/443 are protected on Linux, use 8080/8443 instead
@@ -81,7 +87,7 @@ def create_config_file(enable_ssl, enable_logging_middleware, enable_gzip_middle
             },
         },
         "cors": {
-            "enabled": False,
+            "enabled": enable_cors,
             "allowed_origins": ["*"],
             "allowed_methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
             "allowed_headers": ["Content-Type", "Authorization", "X-Custom-Header"],
@@ -89,7 +95,7 @@ def create_config_file(enable_ssl, enable_logging_middleware, enable_gzip_middle
             "max_age": 3600,
         },
         "rate_limit": {
-            "enabled": False,
+            "enabled": enable_rate_limit,
             "requests_per_minute": 100,
             "burst": 20,
             "whitelist": ["127.0.0.1", "::1"],
@@ -169,6 +175,8 @@ def main(run, no_deploy, enable_ssl, linux, run_headless):
             enable_ssl,
             enable_logging_middleware,
             enable_gzip_middleware,
+            enable_cors,
+            enable_rate_limit,
         )
         copy_html_files()
         if no_deploy:
@@ -206,10 +214,10 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--middleware",
-        choices=["logging", "gzip", "all"],
+        choices=["logging", "gzip", "cors", "ratelimit", "all"],
         nargs="+",
         default=[],
-        help="Enable middleware (logging, gzip, all)",
+        help="Enable middleware (logging, gzip, cors, ratelimit, all)",
     )
 
     parser.add_argument(
@@ -246,6 +254,8 @@ if __name__ == "__main__":
 
     enable_logging_middleware = "logging" in args.middleware or "all" in args.middleware
     enable_gzip_middleware = "gzip" in args.middleware or "all" in args.middleware
+    enable_cors = "cors" in args.middleware or "all" in args.middleware
+    enable_rate_limit = "ratelimit" in args.middleware or "all" in args.middleware
 
     main(
         args.run,
