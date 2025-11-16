@@ -1,5 +1,30 @@
 # Changelog
 
+## [v1.5.0](https://github.com/r1c0n/gws/tree/v1.5.0) (2025-11-16)
+
+[Full Changelog](https://github.com/r1c0n/gws/compare/v1.4.0...v1.5.0)
+
+**New Features:**
+
+- Custom error pages with branded GWS styling (404, 403, 500, 429)
+- CORS middleware with configurable origins, methods, headers, and preflight support
+- Rate limiting middleware with token bucket algorithm, IP-based limiting, and path exemptions
+- Enhanced build script with `--debug` and `--debug-ssl` flags
+- Improved port configuration (443 for SSL, 8443 for Linux SSL)
+
+**Bug Fixes:**
+
+- Fixed 404 error pages not displaying with custom handler interceptor
+- Fixed middleware order to prevent gzip compression of error pages
+- Fixed CORS headers not applying to PathPrefix handlers
+
+**Improvements:**
+
+- Better Linux compatibility in build script
+- Cleaned up Go build flags
+- Enhanced configuration structure with middleware options
+- UTF-8 support in config JSON output
+
 ## [v1.4.0](https://github.com/r1c0n/gws/tree/v1.4.0) (2024-01-13)
 
 [Full Changelog](https://github.com/r1c0n/gws/compare/v1.4.0-beta.2...v1.4.0)
