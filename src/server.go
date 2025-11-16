@@ -11,6 +11,8 @@ import (
 	"github.com/r1c0n/gws/middleware"
 )
 
+// notFoundInterceptor wraps ResponseWriter to intercept 404 status codes
+// and serve custom error pages before http.FileServer writes its default response
 type notFoundInterceptor struct {
 	http.ResponseWriter
 	config        Config
@@ -52,6 +54,7 @@ func (nfi *notFoundInterceptor) Write(b []byte) (int, error) {
 	return nfi.ResponseWriter.Write(b)
 }
 
+// handle404 wraps a handler to intercept and customize 404 responses
 func handle404(handler http.Handler, config Config) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		interceptor := &notFoundInterceptor{
@@ -62,6 +65,7 @@ func handle404(handler http.Handler, config Config) http.Handler {
 	})
 }
 
+// startServer initializes and starts the HTTP/HTTPS server with configured middleware
 func startServer(config Config) {
 	r := mux.NewRouter()
 
@@ -70,7 +74,10 @@ func startServer(config Config) {
 	// Start with the file server
 	var handler http.Handler = http.StripPrefix("/", fs)
 
-	// Apply logging middleware (innermost - closest to handler)
+	// Apply middleware in reverse order (innermost to outermost)
+	// Order: Logging → Rate Limit → CORS → Gzip → 404 Handler
+
+	// Apply logging middleware (innermost - executes last)
 	if config.Middleware.LoggingMiddlewareEnabled {
 		if err := middleware.InitLogFiles(); err != nil {
 			log.Fatalf("Could not initialize log files: %v", err)

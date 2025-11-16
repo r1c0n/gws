@@ -2,8 +2,8 @@ package main
 
 import (
 	"encoding/json"
-	"io/ioutil"
 	"log"
+	"os"
 )
 
 var (
@@ -49,14 +49,14 @@ type Config struct {
 }
 
 func loadConfig(filename string) Config {
-	configData, err := ioutil.ReadFile(filename)
+	configData, err := os.ReadFile(filename)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Failed to read config file '%s': %v", filename, err)
 	}
 
 	var config Config
 	if err := json.Unmarshal(configData, &config); err != nil {
-		log.Fatal(err)
+		log.Fatalf("Failed to parse config file '%s': %v", filename, err)
 	}
 
 	return config

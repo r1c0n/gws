@@ -16,6 +16,7 @@ var (
 	realtimeLogPath = "logs/realtimelogs.log"
 )
 
+// InitLogFiles creates and initializes session and realtime log files
 func InitLogFiles() error {
 	// create logs directory if it doesn't exist
 	logDir := "logs"
@@ -65,6 +66,7 @@ func (rl *responseLogger) WriteHeader(status int) {
 	rl.ResponseWriter.WriteHeader(status)
 }
 
+// LoggingMiddleware logs all HTTP requests with method, path, and timestamp
 func LoggingMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		// record the current time
