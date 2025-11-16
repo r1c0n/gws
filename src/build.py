@@ -215,7 +215,12 @@ if __name__ == "__main__":
     parser.add_argument(
         "--debug",
         action="store_true",
-        help="Debug build configuration (--run, --enable-ssl, --no-deploy, --middleware all)",
+        help="Debug build configuration (--run, --no-deploy, --middleware all)",
+    )
+    parser.add_argument(
+        "--debug-ssl",
+        action="store_true",
+        help="Debug build with SSL (--run, --enable-ssl, --no-deploy, --middleware all)",
     )
     parser.add_argument(
         "--linux",
@@ -225,6 +230,11 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.debug:
+        args.run = True
+        args.no_deploy = True
+        args.middleware = ["all"]
+
+    if args.debug_ssl:
         args.run = True
         args.enable_ssl = True
         args.no_deploy = True
