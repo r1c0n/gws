@@ -43,21 +43,20 @@ def build_project(linux=False):
         os.system("go build -o ./bin/gws")
     else:
         logging.info("Building gws.exe")
-        os.system("go build -buildmode=exe -o ./bin/gws.exe")
-        logging.info("Bulding gwsvc.exe")
-        os.system("go build -buildmode=exe -ldflags -H=windowsgui -o ./bin/gwsvc.exe")
+        os.system("go build -o ./bin/gws.exe")
+        logging.info("Building gwsvc.exe")
+        os.system("go build -ldflags -H=windowsgui -o ./bin/gwsvc.exe")
     logging.info("Project files built")
 
 
 def create_config_file(enable_ssl, enable_logging_middleware, enable_gzip_middleware):
     """Create the 'config.json' file with the given repository configuration."""
     if platform.system() == "Linux":
-        port = ":8080"  # by default port 80 is protected on linux so we want to use 8080 instead
+        # By default port 80/443 are protected on Linux, use 8080/8443 instead
+        port = ":8443" if enable_ssl else ":8080"
     else:
-        if enable_ssl:
-            port = ":443"  # use port 443 for HTTPS when SSL is enabled
-        else:
-            port = ":80"  # default to port 80 for HTTP
+        # Windows: use standard HTTP (80) or HTTPS (443) ports
+        port = ":443" if enable_ssl else ":80"
     config_data = {
         "port": port,
         "domain": "localhost",
