@@ -15,8 +15,8 @@ from pathlib import Path
 BIN_PATH = Path("./bin")
 CONFIG_FILE_PATH = BIN_PATH / "config.json"
 HTML_DIR_PATH = BIN_PATH / "html"
-RELEASE_ZIP_PATH = BIN_PATH / "Release.zip"
-RELEASE_TAR_PATH = BIN_PATH / "Release.tar.gz"
+RELEASE_ZIP_WINDOWS = BIN_PATH / "Release-Windows.zip"
+RELEASE_TAR_LINUX = BIN_PATH / "Release-Linux.tar.gz"
 GWS_EXE_TILDE_PATH = BIN_PATH / "gws.exe~"
 
 logging.basicConfig(level=logging.INFO)
@@ -117,44 +117,57 @@ def copy_html_files():
 
 
 def zip_bin_contents(linux=False):
-    """Zip the contents of the 'bin' directory (or create a tar.gz if on Linux)."""
+    """Zip the contents of the 'bin' directory with platform-specific naming."""
     if linux:
-        if RELEASE_TAR_PATH.exists():
-            RELEASE_TAR_PATH.unlink()
+        release_path = RELEASE_TAR_LINUX
+        if release_path.exists():
+            release_path.unlink()
 
-        with tarfile.open(RELEASE_TAR_PATH, "w:gz") as tar_file:
+        with tarfile.open(release_path, "w:gz") as tar_file:
             # DO NOT REMOVE SUBFOLDERS! IT WILL BREAK THE BUILD SCRIPT!!
             for foldername, subfolders, filenames in os.walk(BIN_PATH):
+                # Skip logs directory entirely
+                if "logs" in Path(foldername).parts:
+                    continue
                 for filename in filenames:
                     file_path = Path(foldername) / filename
                     arcname = file_path.relative_to(BIN_PATH)
                     if arcname.name not in [
-                        "Release.tar.gz",
+                        "Release-Linux.tar.gz",
+                        "Release-Windows.zip",
                         "server.crt",
                         "server.key",
                         ".gws.exe.old",
-                    ]:
+                        "gws.exe",
+                        "gwsvc.exe",
+                    ] and not str(arcname).endswith(".log"):
                         tar_file.add(file_path, arcname)
-        logging.info("Content archived to Release.tar.gz")
+        logging.info(f"Content archived to {release_path.name}")
     else:
-        if RELEASE_ZIP_PATH.exists():
-            RELEASE_ZIP_PATH.unlink()
+        release_path = RELEASE_ZIP_WINDOWS
+        if release_path.exists():
+            release_path.unlink()
 
-        with zipfile.ZipFile(RELEASE_ZIP_PATH, "w") as zip_file:
+        with zipfile.ZipFile(release_path, "w") as zip_file:
             # DO NOT REMOVE SUBFOLDERS! IT WILL BREAK THE BUILD SCRIPT!!
             for foldername, subfolders, filenames in os.walk(BIN_PATH):
+                # Skip logs directory entirely
+                if "logs" in Path(foldername).parts:
+                    continue
                 for filename in filenames:
                     file_path = Path(foldername) / filename
                     arcname = file_path.relative_to(BIN_PATH)
                     if arcname.name not in [
-                        "Release.zip",
+                        "Release-Windows.zip",
+                        "Release-Linux.tar.gz",
                         "server.crt",
                         "server.key",
                         ".gws.exe.old",
-                    ]:
+                        "gws",
+                    ] and not str(arcname).endswith(".log"):
                         zip_file.write(file_path, arcname)
 
-        logging.info("Content zipped to Release.zip")
+        logging.info(f"Content zipped to {release_path.name}")
 
 
 def remove_gws_exe_tilde():
@@ -164,26 +177,50 @@ def remove_gws_exe_tilde():
         logging.info("gws.exe~ file removed")
 
 
-def main(run, no_deploy, enable_ssl, linux, run_headless):
+def main(run, deploy, enable_ssl, linux, run_headless):
     try:
-        # Close running GWS process if exists (platform-specific name)
-        process_name = "gws" if linux else "gws.exe"
-        check_and_close_process(process_name)
-        create_bin_folder()
-        build_project(linux=linux)
-        create_config_file(
-            enable_ssl,
-            enable_logging_middleware,
-            enable_gzip_middleware,
-            enable_cors,
-            enable_rate_limit,
-        )
-        copy_html_files()
-        if no_deploy:
+        if deploy:
+            # Build for both Windows and Linux
+            logging.info("Building for Windows...")
+            check_and_close_process("gws.exe")
+            create_bin_folder()
+            build_project(linux=False)
+            create_config_file(
+                enable_ssl,
+                enable_logging_middleware,
+                enable_gzip_middleware,
+                enable_cors,
+                enable_rate_limit,
+            )
+            copy_html_files()
+            zip_bin_contents(linux=False)
             remove_gws_exe_tilde()
-            logging.info("Build completed")
+
+            logging.info("Building for Linux...")
+            build_project(linux=True)
+            create_config_file(
+                enable_ssl,
+                enable_logging_middleware,
+                enable_gzip_middleware,
+                enable_cors,
+                enable_rate_limit,
+            )
+            zip_bin_contents(linux=True)
+            logging.info("Deployment builds completed for both platforms")
         else:
-            zip_bin_contents(linux=linux)
+            # Regular build for current platform
+            process_name = "gws" if linux else "gws.exe"
+            check_and_close_process(process_name)
+            create_bin_folder()
+            build_project(linux=linux)
+            create_config_file(
+                enable_ssl,
+                enable_logging_middleware,
+                enable_gzip_middleware,
+                enable_cors,
+                enable_rate_limit,
+            )
+            copy_html_files()
             remove_gws_exe_tilde()
             logging.info("Build completed")
 
@@ -208,7 +245,11 @@ if __name__ == "__main__":
     parser.add_argument(
         "--run", action="store_true", help="Run Gamma Web Server after build"
     )
-    parser.add_argument("--no-deploy", action="store_true", help="Don't zip contents")
+    parser.add_argument(
+        "--deploy",
+        action="store_true",
+        help="Build release packages for both Windows and Linux",
+    )
     parser.add_argument(
         "--enable-ssl", action="store_true", help="Enable SSL in config"
     )
@@ -227,12 +268,12 @@ if __name__ == "__main__":
     parser.add_argument(
         "--debug",
         action="store_true",
-        help="Debug build configuration (--run, --no-deploy, --middleware all)",
+        help="Debug build configuration (--run, --middleware all)",
     )
     parser.add_argument(
         "--debug-ssl",
         action="store_true",
-        help="Debug build with SSL (--run, --enable-ssl, --no-deploy, --middleware all)",
+        help="Debug build with SSL (--run, --enable-ssl, --middleware all)",
     )
     parser.add_argument(
         "--linux",
@@ -243,13 +284,11 @@ if __name__ == "__main__":
 
     if args.debug:
         args.run = True
-        args.no_deploy = True
         args.middleware = ["all"]
 
     if args.debug_ssl:
         args.run = True
         args.enable_ssl = True
-        args.no_deploy = True
         args.middleware = ["all"]
 
     enable_logging_middleware = "logging" in args.middleware or "all" in args.middleware
@@ -259,7 +298,7 @@ if __name__ == "__main__":
 
     main(
         args.run,
-        args.no_deploy,
+        args.deploy,
         args.enable_ssl,
         args.linux,
         args.run_headless,
